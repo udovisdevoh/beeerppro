@@ -1,10 +1,12 @@
 package modules.expoModule.entityDefinitions;
 
-import newtonERP.orm.field.*;
-import newtonERP.orm.field.type.*;import newtonERP.orm.associations.AccessorManager;
-import newtonERP.module.AbstractOrmEntity;
-import java.util.Hashtable;
 import java.util.Vector;
+
+import newtonERP.module.AbstractOrmEntity;
+import newtonERP.orm.field.Field;
+import newtonERP.orm.field.Fields;
+import newtonERP.orm.field.type.FieldInt;
+import newtonERP.orm.field.type.FieldString;
 
 /**
  * Type de muret
@@ -18,19 +20,19 @@ public class WallType extends AbstractOrmEntity
      */
     public WallType() throws Exception
     {
-        super();
-        setVisibleName("Type de muret");
+	super();
+	setVisibleName("Type de muret");
     }
 
     public Fields initFields() throws Exception
     {
-        Vector<Field<?>> fieldList = new Vector<Field<?>>();
+	Vector<Field<?>> fieldList = new Vector<Field<?>>();
 
-        FieldInt pKwallTypeID = new FieldInt("Numéro", getPrimaryKeyName());
-        fieldList.add(pKwallTypeID);
+	FieldInt pKwallTypeID = new FieldInt("Numéro", getPrimaryKeyName());
+	fieldList.add(pKwallTypeID);
 
-        FieldString name = new FieldString("Description", "Name");
-        fieldList.add(name);
-        return new Fields(fieldList);
+	FieldString name = new FieldString("Description", "Name");
+	fieldList.add(name);
+	return new Fields(fieldList);
     }
 }

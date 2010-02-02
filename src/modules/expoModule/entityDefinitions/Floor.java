@@ -1,10 +1,12 @@
 package modules.expoModule.entityDefinitions;
 
-import newtonERP.orm.field.*;
-import newtonERP.orm.field.type.*;import newtonERP.orm.associations.AccessorManager;
-import newtonERP.module.AbstractOrmEntity;
-import java.util.Hashtable;
 import java.util.Vector;
+
+import newtonERP.module.AbstractOrmEntity;
+import newtonERP.orm.field.Field;
+import newtonERP.orm.field.Fields;
+import newtonERP.orm.field.type.FieldInt;
+import newtonERP.orm.field.type.FieldString;
 
 /**
  * Plancher
@@ -18,19 +20,19 @@ public class Floor extends AbstractOrmEntity
      */
     public Floor() throws Exception
     {
-        super();
-        setVisibleName("Plancher");
+	super();
+	setVisibleName("Plancher");
     }
 
     public Fields initFields() throws Exception
     {
-        Vector<Field<?>> fieldList = new Vector<Field<?>>();
+	Vector<Field<?>> fieldList = new Vector<Field<?>>();
 
-        FieldInt pKfloorID = new FieldInt("Numéro", getPrimaryKeyName());
-        fieldList.add(pKfloorID);
+	FieldInt pKfloorID = new FieldInt("Numéro", getPrimaryKeyName());
+	fieldList.add(pKfloorID);
 
-        FieldString nom = new FieldString("Description", "Nom");
-        fieldList.add(nom);
-        return new Fields(fieldList);
+	FieldString nom = new FieldString("Description", "Nom");
+	fieldList.add(nom);
+	return new Fields(fieldList);
     }
 }
