@@ -2,6 +2,7 @@ package modules.expoModule.entityDefinitions;
 
 import java.util.Vector;
 
+import modules.userRightModule.entityDefinitions.User;
 import newtonERP.module.AbstractOrmEntity;
 import newtonERP.orm.associations.AccessorManager;
 import newtonERP.orm.field.Field;
@@ -25,6 +26,7 @@ public class KioskCustomer extends AbstractOrmEntity
 	super();
 	setVisibleName("Client de kiosque");
 	AccessorManager.addAccessor(this, new CompanyDomain());
+	AccessorManager.addAccessor(this, new User());
     }
 
     public Fields initFields() throws Exception
@@ -50,6 +52,10 @@ public class KioskCustomer extends AbstractOrmEntity
 
 	FieldString email = new FieldString("Courriel", "Email");
 	fieldList.add(email);
+
+	FieldInt user = new FieldInt("Utilisateur", "userID");
+	user.setReadOnly(true);
+	fieldList.add(user);
 
 	FieldDateTime date = new FieldDateTime("Date d`inscription", "Date");
 	date.setReadOnly(true);
