@@ -10,6 +10,7 @@ import newtonERP.module.AbstractOrmEntity;
 import newtonERP.module.BaseAction;
 import newtonERP.module.Module;
 import newtonERP.orm.Orm;
+import newtonERP.serveur.ConfigManager;
 
 /**
  * @author Gabriel Therrien, Guillaume Lacasse, CloutierJo
@@ -92,8 +93,8 @@ public class UserRightModule extends Module
 
 	// cree le user Admin
 	user = new User();
-	user.setData("name", "admin");
-	user.setData("password", "aaa");
+	user.setData("name", ConfigManager.getDefaultUserName());
+	user.setData("password", ConfigManager.getDefaultPassWord());
 	user.setData("groupsID", groupsID);
 	user.newE();
 
