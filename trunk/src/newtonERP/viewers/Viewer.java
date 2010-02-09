@@ -7,6 +7,7 @@ import newtonERP.common.Authentication;
 import newtonERP.common.ListModule;
 import newtonERP.module.AbstractEntity;
 import newtonERP.module.Module;
+import newtonERP.serveur.ConfigManager;
 import newtonERP.serveur.Servlet;
 import newtonERP.viewers.firstStep.AlertViewer;
 import newtonERP.viewers.firstStep.BaseViewer;
@@ -81,8 +82,10 @@ public abstract class Viewer
      * @param actionName the action name
      * 
      * @return html
+     * @throws Exception si ça fail
      */
     public static String getHeader(String moduleName, String actionName)
+	    throws Exception
     {
 	String pageTitle = buildPageTitle(moduleName, actionName);
 
@@ -96,8 +99,10 @@ public abstract class Viewer
 		+ Viewer.getEncoding() + "\" />";
 
 	// css******************************************************************
-	header += "<link rel=\"stylesheet\" type=\"text/css\" title=\"base\" href=\"/file/styleScreen.css\" media=\"screen\" />";
-	header += "<link rel=\"stylesheet\" type=\"text/css\" title=\"base\" href=\"/file/stylePrint.css\" media=\"print\" />";
+	header += "<link rel=\"stylesheet\" type=\"text/css\" title=\"base\" href=\""
+		+ ConfigManager.getStyleFileScreen() + "\" media=\"screen\" />";
+	header += "<link rel=\"stylesheet\" type=\"text/css\" title=\"base\" href=\""
+		+ ConfigManager.getStyleFilePrint() + "\" media=\"print\" />";
 	header += "</head><body><div id=\"header\"><h1>" + pageTitle
 		+ "</h1></div>";
 
@@ -125,8 +130,9 @@ public abstract class Viewer
     }
 
     private static String buildPageTitle(String moduleName, String actionName)
+	    throws Exception
     {
-	String title = "Bee ERP";
+	String title = ConfigManager.getDisplayName();
 
 	if (moduleName != null && !moduleName.equals("null"))
 	    title += " - " + moduleName;

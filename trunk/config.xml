@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Available DBMS: sqlite only (for now) -->
-<!-- Default screen style: file/styleScreen.css -->
-<!-- Default print style: file/stylePrint.css -->
+<!-- Available DBMS name: sqlite only (for now) -->
+<!-- Available screen style: /file/styleScreen.css -->
+<!-- Available print style: /file/stylePrint.css -->
 <config>
-	<display-name>BeeERP</display-name>
-	<dmbs>sqlite</dmbs>
-	<authentication>
-		<default-user name="admin" password="aaa" />
-	</authentication>
-	<style>
-		<screen>file/styleScreen.css</screen>
-		<print>file/stylePrint.css</print>
-	</style>
+	<display-name>Bee ERP</display-name>
+	<dmbs-name>sqlite</dmbs-name>
+	<default-user name="admin" password="aaa" />
+	<style-screen>/file/styleScreen.css</style-screen>
+	<style-print>/file/stylePrint.css</style-print>
+	<port>47098</port>
 </config>

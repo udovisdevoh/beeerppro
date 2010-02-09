@@ -14,7 +14,6 @@ import newtonERP.orm.associations.FlagPoolManager;
 import newtonERP.orm.associations.GateWay;
 import newtonERP.orm.associations.PluralAccessor;
 import newtonERP.orm.associations.PluralAccessorManager;
-import newtonERP.orm.exceptions.OrmException;
 import newtonERP.orm.field.Field;
 import newtonERP.orm.field.Fields;
 import newtonERP.orm.field.type.FieldCurrency;
@@ -445,9 +444,9 @@ public abstract class AbstractOrmEntity extends AbstractEntity
     /**
      * fais un get sur un criter simple exprimé par l'entity this
      * @return the selected entities
-     * @throws OrmException remonte
+     * @throws Exception remonte
      */
-    public final Vector<AbstractOrmEntity> get() throws OrmException
+    public final Vector<AbstractOrmEntity> get() throws Exception
     {
 	return get(this);
     }
@@ -455,10 +454,10 @@ public abstract class AbstractOrmEntity extends AbstractEntity
     /**
      * @param entity the search entity
      * @return the selected entities
-     * @throws OrmException remonte
+     * @throws Exception remonte
      */
     public final Vector<AbstractOrmEntity> get(AbstractOrmEntity entity)
-	    throws OrmException
+	    throws Exception
     {
 	Vector<AbstractOrmEntity> entities = new Vector<AbstractOrmEntity>();
 	entities.add(entity);
@@ -469,10 +468,10 @@ public abstract class AbstractOrmEntity extends AbstractEntity
      * @param entities the entities from which we are going to select our data
      *            (where clause)
      * @return the selected entities
-     * @throws OrmException remonte
+     * @throws Exception remonte
      */
     public final Vector<AbstractOrmEntity> get(
-	    Vector<AbstractOrmEntity> entities) throws OrmException
+	    Vector<AbstractOrmEntity> entities) throws Exception
     {
 	Vector<AbstractOrmEntity> retEntities = null;
 	retEntities = Orm.select(entities);
