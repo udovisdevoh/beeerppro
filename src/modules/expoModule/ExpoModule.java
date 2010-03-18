@@ -1,5 +1,6 @@
 package modules.expoModule;
 
+import modules.expoModule.entityDefinitions.CompanyDomain;
 import modules.userRightModule.entityDefinitions.Groups;
 import newtonERP.module.Module;
 
@@ -28,5 +29,9 @@ public class ExpoModule extends Module
 	groups = new Groups();
 	groups.setData("groupName", "expoGroup");
 	groups.newE();
+
+	CompanyDomain companyDomain = new CompanyDomain();
+	companyDomain.setData("Name", "misc");
+	companyDomain.newE();
     }
 }

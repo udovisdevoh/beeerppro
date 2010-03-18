@@ -1,7 +1,10 @@
 package modules.expoModule.actions;
 
+import java.util.GregorianCalendar;
 import java.util.Hashtable;
 
+import modules.expoModule.entityDefinitions.CompanyDomain;
+import modules.expoModule.entityDefinitions.KioskCustomer;
 import modules.userRightModule.UserRightModule;
 import modules.userRightModule.entityDefinitions.Groups;
 import modules.userRightModule.entityDefinitions.User;
@@ -60,6 +63,18 @@ public class Subscribe extends AbstractAction
 		user.setData("groupsID", groups.getPrimaryKeyValue());
 		user.setData("password", currentPassword);
 		user.newE();
+
+		CompanyDomain companyDomain = new CompanyDomain();
+		companyDomain.setData("Name", "misc");
+		companyDomain = (CompanyDomain) companyDomain.get().get(0);
+
+		KioskCustomer kioskCustomer = new KioskCustomer();
+		kioskCustomer.assign(user);
+		kioskCustomer.assign(companyDomain);
+		kioskCustomer.setData("Company", currentLoginName);
+		kioskCustomer.getFields().getField("Date").setData(
+			new GregorianCalendar());
+		kioskCustomer.newE();
 
 		Authentication.setCurrentUserName(currentLoginName);
 		return new StaticTextEntity("Votre compte a été créé.");
