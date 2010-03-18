@@ -5,7 +5,7 @@
 <!-- Available default module name: UserRightModule -->
 <!-- Available default action name: Login -->
 <config>
-	<display-name>Bee ERP</display-name>
+	<display-name>Expo</display-name>
 	<dmbs-name>sqlite</dmbs-name>
 	<default-user name="admin" password="aaa" />
 	<default-module>UserRightModule</default-module>
