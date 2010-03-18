@@ -1,1 +1,2 @@
 http://localhost:47098
+http://localhost:47098/ExpoModule/ShowSplashScreen

@@ -7,6 +7,7 @@ import newtonERP.common.Authentication;
 import newtonERP.common.ListModule;
 import newtonERP.module.AbstractEntity;
 import newtonERP.module.Module;
+import newtonERP.module.generalEntity.SplashScreen;
 import newtonERP.serveur.ConfigManager;
 import newtonERP.serveur.Servlet;
 import newtonERP.viewers.firstStep.AlertViewer;
@@ -15,6 +16,7 @@ import newtonERP.viewers.firstStep.ForwardViewer;
 import newtonERP.viewers.firstStep.GridViewer;
 import newtonERP.viewers.firstStep.ImgViewer;
 import newtonERP.viewers.firstStep.PromptViewer;
+import newtonERP.viewers.firstStep.SplashScreenViewer;
 import newtonERP.viewers.firstStep.StaticTextViewer;
 import newtonERP.viewers.viewables.AlertViewable;
 import newtonERP.viewers.viewables.ForwardViewable;
@@ -62,6 +64,8 @@ public abstract class Viewer
 	    viewerHtml += GridViewer.getHtmlCode((GridViewerData) entity);
 	else if (entity instanceof ImgViewerData)
 	    viewerHtml += ImgViewer.getHtmlCode((ImgViewerData) entity);
+	else if (entity instanceof SplashScreen)
+	    viewerHtml += SplashScreenViewer.getHtmlCode((SplashScreen) entity);
 	else if (entity == null)
 	    viewerHtml += "<!-- page vide -->";
 	else
