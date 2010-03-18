@@ -6,6 +6,7 @@ import newtonERP.module.AbstractOrmEntity;
 import newtonERP.orm.associations.AccessorManager;
 import newtonERP.orm.field.Field;
 import newtonERP.orm.field.Fields;
+import newtonERP.orm.field.type.FieldCurrency;
 import newtonERP.orm.field.type.FieldInt;
 
 /**
@@ -34,6 +35,9 @@ public class KioskInvoice extends AbstractOrmEntity
 
 	FieldInt client = new FieldInt("Client", "kioskCustomerID");
 	fieldList.add(client);
+
+	FieldCurrency total = new FieldCurrency("Total", "total");
+	fieldList.add(total);
 
 	return new Fields(fieldList);
     }

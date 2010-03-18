@@ -65,7 +65,7 @@ public class Subscribe extends AbstractAction
 		user.newE();
 
 		CompanyDomain companyDomain = new CompanyDomain();
-		companyDomain.setData("Name", "misc");
+		companyDomain.setData("Name", "autre");
 		companyDomain = (CompanyDomain) companyDomain.get().get(0);
 
 		KioskCustomer kioskCustomer = new KioskCustomer();

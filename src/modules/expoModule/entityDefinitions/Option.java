@@ -3,10 +3,11 @@ package modules.expoModule.entityDefinitions;
 import java.util.Vector;
 
 import newtonERP.module.AbstractOrmEntity;
-import newtonERP.orm.associations.AccessorManager;
 import newtonERP.orm.field.Field;
 import newtonERP.orm.field.Fields;
+import newtonERP.orm.field.type.FieldCurrency;
 import newtonERP.orm.field.type.FieldInt;
+import newtonERP.orm.field.type.FieldString;
 
 /**
  * Option
@@ -22,7 +23,6 @@ public class Option extends AbstractOrmEntity
     {
 	super();
 	setVisibleName("Option");
-	AccessorManager.addAccessor(this, new KioskInvoice());
     }
 
     public Fields initFields() throws Exception
@@ -32,8 +32,11 @@ public class Option extends AbstractOrmEntity
 	FieldInt pKoptionID = new FieldInt("Numéro", getPrimaryKeyName());
 	fieldList.add(pKoptionID);
 
-	FieldInt kioskInvoiceID = new FieldInt("Facture", "kioskInvoiceID");
-	fieldList.add(kioskInvoiceID);
+	FieldString name = new FieldString("Description", "name");
+	fieldList.add(name);
+
+	FieldCurrency prix = new FieldCurrency("Prix", "price");
+	fieldList.add(prix);
 	return new Fields(fieldList);
     }
 }
