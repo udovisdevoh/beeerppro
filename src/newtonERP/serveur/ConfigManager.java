@@ -30,6 +30,10 @@ public class ConfigManager
 
     private static String defaultPassWord = null;
 
+    private static String defaultModuleName = null;
+
+    private static String defaultActionName = null;
+
     private static String dbmsName = null;
 
     private static File file = null;
@@ -97,6 +101,20 @@ public class ConfigManager
     private static String loadDisplayName() throws Exception
     {
 	NodeList nodeList = getDocument().getElementsByTagName("display-name");
+	return nodeList.item(0).getFirstChild().getNodeValue();
+    }
+
+    private static String loadDefaultModuleName() throws Exception
+    {
+	NodeList nodeList = getDocument()
+		.getElementsByTagName("default-module");
+	return nodeList.item(0).getFirstChild().getNodeValue();
+    }
+
+    private static String loadDefaultActionName() throws Exception
+    {
+	NodeList nodeList = getDocument()
+		.getElementsByTagName("default-action");
 	return nodeList.item(0).getFirstChild().getNodeValue();
     }
 
@@ -183,5 +201,27 @@ public class ConfigManager
 	NodeList nodeList = getDocument().getElementsByTagName("dmbs-name");
 	Node node = nodeList.item(0);
 	return node.getFirstChild().getNodeValue();
+    }
+
+    /**
+     * @return nom du module par default
+     * @throws Exception si ça fail
+     */
+    public static String getDefaultModuleName() throws Exception
+    {
+	if (defaultModuleName == null)
+	    defaultModuleName = loadDefaultModuleName();
+	return defaultModuleName;
+    }
+
+    /**
+     * @return nom de l'action par default
+     * @throws Exception si ça fail
+     */
+    public static String getDefaultActionName() throws Exception
+    {
+	if (defaultActionName == null)
+	    defaultActionName = loadDefaultActionName();
+	return defaultActionName;
     }
 }
