@@ -1,5 +1,6 @@
 package modules.expoModule;
 
+import modules.userRightModule.entityDefinitions.Groups;
 import newtonERP.module.Module;
 
 /**
@@ -14,12 +15,18 @@ public class ExpoModule extends Module
      */
     public ExpoModule() throws Exception
     {
-        super();
-        setVisibleName("Module d`exposition");
+	super();
+	setVisibleName("Module d`exposition");
     }
 
     public void initDB() throws Exception
     {
-        super.initDB();
+	super.initDB();
+
+	Groups groups;
+
+	groups = new Groups();
+	groups.setData("groupName", "expoGroup");
+	groups.newE();
     }
 }
