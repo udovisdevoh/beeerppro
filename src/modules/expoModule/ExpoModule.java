@@ -30,7 +30,7 @@ public class ExpoModule extends Module
     {
 	super.initDB();
 
-	initExpositon();
+	initFloor();
 	initPermissions();
 	initCompanyDomains();
 	initOptions();
@@ -59,10 +59,12 @@ public class ExpoModule extends Module
 	internetConnectionType.newE();
     }
 
-    private void initExpositon() throws Exception
+    private void initFloor() throws Exception
     {
 	Floor floor = new Floor();
 	floor.setData("Nom", "Expo 67");
+	floor.setData("Width", 13);
+	floor.setData("Height", 11);
 	floor.newE();
     }
 
