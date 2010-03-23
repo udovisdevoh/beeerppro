@@ -5,7 +5,9 @@ import java.util.Vector;
 import newtonERP.module.AbstractOrmEntity;
 import newtonERP.orm.associations.AccessorManager;
 import newtonERP.orm.field.Field;
+import newtonERP.orm.field.FieldCalcule;
 import newtonERP.orm.field.Fields;
+import newtonERP.orm.field.type.FieldCurrency;
 import newtonERP.orm.field.type.FieldInt;
 
 /**
@@ -45,6 +47,11 @@ public class KioskInvoiceItem extends AbstractOrmEntity
 	amount.setNaturalKey(true);
 	fieldList.add(amount);
 
+	FieldCurrency sousTotal = new FieldCurrency("Sous-total", "sousTotal");
+	sousTotal.setCalcul(new FieldCalculeSousTotal());
+	sousTotal.setNaturalKey(true);
+	fieldList.add(sousTotal);
+
 	return new Fields(fieldList);
     }
 
@@ -62,5 +69,24 @@ public class KioskInvoiceItem extends AbstractOrmEntity
     private Option getOption() throws Exception
     {
 	return (Option) AccessorManager.getSingleAccessor(this, "optionID");
+    }
+
+    private class FieldCalculeSousTotal extends FieldCalcule<Double>
+    {
+	@Override
+	protected Double calcul(Fields entityFields) throws Exception
+	{
+	    double amount = ((FieldInt) (entityFields.getField("amount")))
+		    .getData();
+
+	    Option option = new Option();
+	    int optionId = (Integer) entityFields.getField(
+		    option.getForeignKeyName()).getData();
+	    option.setData(option.getPrimaryKeyName(), optionId);
+	    option = (Option) option.get().get(0);
+
+	    double price = (Double) option.getData("price");
+	    return amount * price;
+	}
     }
 }
