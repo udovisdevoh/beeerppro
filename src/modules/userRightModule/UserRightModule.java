@@ -115,4 +115,41 @@ public class UserRightModule extends Module
 	    groupsRight.newE();
 	}
     }
+
+    /**
+     * @param groupName group's name
+     * @param rightActionName right's name
+     * @throws Exception si ça fail
+     */
+    public void addGroupsRight(String groupName, String rightActionName)
+	    throws Exception
+    {
+	Groups groups = (Groups) Orm.getOrCreateEntity(new Groups(),
+		"groupName", groupName);
+	Right right = (Right) Orm.getOrCreateEntity(new Right(), "actionName",
+		rightActionName);
+
+	Orm.getOrCreateEntity(new GroupsRight(), groups.getForeignKeyName(),
+		groups.getPrimaryKeyValue().toString(), right
+			.getForeignKeyName(), right.getPrimaryKeyValue()
+			.toString());
+    }
+
+    /**
+     * @param groupName group's name
+     * @param rightActionName right's name
+     * @throws Exception si ça fail
+     */
+    public void removeGroupsRight(String groupName, String rightActionName)
+	    throws Exception
+    {
+	Groups groups = (Groups) Orm.getOrCreateEntity(new Groups(),
+		"groupName", groupName);
+	Right right = (Right) Orm.getOrCreateEntity(new Right(), "actionName",
+		rightActionName);
+
+	Orm.delete(new GroupsRight(), groups.getForeignKeyName(), groups
+		.getPrimaryKeyValue().toString(), right.getForeignKeyName(),
+		right.getPrimaryKeyValue().toString());
+    }
 }

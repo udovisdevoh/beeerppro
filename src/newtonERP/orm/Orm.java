@@ -472,4 +472,73 @@ public class Orm
 		searchEntity, searchParameters, limit, offset, orderBy),
 		searchEntity);
     }
+
+    /**
+     * @param entityAsType entity as a type reference or empty entity to fill
+     *            data from orm
+     * @param fieldName key
+     * @param fieldValue value
+     * @return new entity or found entity
+     * @throws Exception si c¸a fail
+     */
+    public static AbstractOrmEntity getOrCreateEntity(
+	    AbstractOrmEntity entityAsType, String fieldName, String fieldValue)
+	    throws Exception
+    {
+	entityAsType.setData(fieldName, fieldValue);
+
+	Vector<AbstractOrmEntity> entityList = entityAsType.get();
+
+	if (entityList.size() > 0)
+	{
+	    return entityList.get(0);
+	}
+
+	entityAsType.newE();
+	return entityAsType;
+    }
+
+    /**
+     * @param entityAsType entity as a type reference or empty entity to fill
+     * @param fieldName1 key1
+     * @param fieldValue1 value2
+     * @param fieldName2 key2
+     * @param fieldValue2 value2
+     * @return new entity or found entity
+     * @throws Exception si c¸a fail
+     */
+    public static AbstractOrmEntity getOrCreateEntity(
+	    AbstractOrmEntity entityAsType, String fieldName1,
+	    String fieldValue1, String fieldName2, String fieldValue2)
+	    throws Exception
+    {
+	entityAsType.setData(fieldName1, fieldValue1);
+	entityAsType.setData(fieldName2, fieldValue2);
+
+	Vector<AbstractOrmEntity> entityList = entityAsType.get();
+
+	if (entityList.size() > 0)
+	{
+	    return entityList.get(0);
+	}
+
+	entityAsType.newE();
+	return entityAsType;
+    }
+
+    public static void delete(AbstractOrmEntity entityAsType,
+	    String fieldName1, String fieldValue1, String fieldName2,
+	    String fieldValue2) throws Exception
+    {
+	entityAsType.setData(fieldName1, fieldValue1);
+	entityAsType.setData(fieldName2, fieldValue2);
+
+	Vector<AbstractOrmEntity> entityList = entityAsType.get();
+
+	if (entityList.size() > 0)
+	{
+	    entityList.get(0).delete();
+	}
+
+    }
 }

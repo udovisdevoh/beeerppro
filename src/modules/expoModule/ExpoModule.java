@@ -2,7 +2,9 @@ package modules.expoModule;
 
 import modules.expoModule.entityDefinitions.CompanyDomain;
 import modules.expoModule.entityDefinitions.Option;
+import modules.userRightModule.UserRightModule;
 import modules.userRightModule.entityDefinitions.Groups;
+import newtonERP.common.ListModule;
 import newtonERP.module.Module;
 
 /**
@@ -129,5 +131,14 @@ public class ExpoModule extends Module
 	companyDomain = new CompanyDomain();
 	companyDomain.setData("Name", "enseignement");
 	companyDomain.newE();
+
+	UserRightModule userRightModule = (UserRightModule) ListModule
+		.getModule("UserRightModule");
+
+	userRightModule.addGroupsRight("unLogedGroup", "ShowSplashScreen");
+	userRightModule.addGroupsRight("unLogedGroup", "Subscribe");
+
+	userRightModule.addGroupsRight("expoGroup", "Logout");
+	userRightModule.addGroupsRight("expoGroup", "ShowSplashScreen");
     }
 }
