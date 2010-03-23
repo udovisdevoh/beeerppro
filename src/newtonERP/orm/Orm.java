@@ -526,6 +526,15 @@ public class Orm
 	return entityAsType;
     }
 
+    /**
+     * @param entityAsType entité en tant que référence de type ou entité vide
+     *            pour ajouter des champs
+     * @param fieldName1 key1
+     * @param fieldValue1 value1
+     * @param fieldName2 key2
+     * @param fieldValue2 value2
+     * @throws Exception si ça fail
+     */
     public static void delete(AbstractOrmEntity entityAsType,
 	    String fieldName1, String fieldValue1, String fieldName2,
 	    String fieldValue2) throws Exception
