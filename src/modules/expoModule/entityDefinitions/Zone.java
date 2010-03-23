@@ -24,7 +24,6 @@ public class Zone extends AbstractOrmEntity
 	setVisibleName("Zone");
 	AccessorManager.addAccessor(this, new Floor());
 	AccessorManager.addAccessor(this, new KioskCustomer());
-	// AccessorManager.addAccessor(this, new InternetConnectionType());
     }
 
     public Fields initFields() throws Exception
@@ -45,11 +44,6 @@ public class Zone extends AbstractOrmEntity
 	FieldInt plugCount = new FieldInt("Nombre de prises électriques",
 		"PlugCount");
 	fieldList.add(plugCount);
-
-	/*
-	 * FieldInt client = new FieldInt("Connexion internet",
-	 * "internetConnectionTypeID"); fieldList.add(client);
-	 */
 
 	FieldInt client = new FieldInt("Client", "kioskCustomerID");
 	client.setNaturalKey(true);

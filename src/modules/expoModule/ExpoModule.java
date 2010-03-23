@@ -2,6 +2,7 @@ package modules.expoModule;
 
 import modules.expoModule.entityDefinitions.CompanyDomain;
 import modules.expoModule.entityDefinitions.Floor;
+import modules.expoModule.entityDefinitions.InternetConnectionType;
 import modules.expoModule.entityDefinitions.Option;
 import modules.expoModule.entityDefinitions.WallType;
 import modules.userRightModule.UserRightModule;
@@ -34,6 +35,28 @@ public class ExpoModule extends Module
 	initCompanyDomains();
 	initOptions();
 	initWallTypes();
+	initInternetConnectionTypes();
+    }
+
+    private void initInternetConnectionTypes() throws Exception
+    {
+	InternetConnectionType internetConnectionType;
+
+	internetConnectionType = new InternetConnectionType();
+	internetConnectionType.setData("Name", "aucune");
+	internetConnectionType.newE();
+
+	internetConnectionType = new InternetConnectionType();
+	internetConnectionType.setData("Name", "Internet 500KB");
+	internetConnectionType.newE();
+
+	internetConnectionType = new InternetConnectionType();
+	internetConnectionType.setData("Name", "Internet 2MB");
+	internetConnectionType.newE();
+
+	internetConnectionType = new InternetConnectionType();
+	internetConnectionType.setData("Name", "Internet 5MB");
+	internetConnectionType.newE();
     }
 
     private void initExpositon() throws Exception
@@ -125,11 +148,6 @@ public class ExpoModule extends Module
 	option = new Option();
 	option.setData("name", "Muret 1.5m");
 	option.setData("price", 100);
-	option.newE();
-
-	option = new Option();
-	option.setData("name", "Internet");
-	option.setData("price", 20);
 	option.newE();
 
 	option = new Option();
