@@ -1,7 +1,9 @@
 package modules.expoModule;
 
 import modules.expoModule.entityDefinitions.CompanyDomain;
+import modules.expoModule.entityDefinitions.Floor;
 import modules.expoModule.entityDefinitions.Option;
+import modules.expoModule.entityDefinitions.WallType;
 import modules.userRightModule.UserRightModule;
 import modules.userRightModule.entityDefinitions.Groups;
 import newtonERP.common.ListModule;
@@ -27,9 +29,55 @@ public class ExpoModule extends Module
     {
 	super.initDB();
 
+	initExpositon();
 	initPermissions();
 	initCompanyDomains();
 	initOptions();
+	initWallTypes();
+    }
+
+    private void initExpositon() throws Exception
+    {
+	Floor floor = new Floor();
+	floor.setData("Nom", "Expo 67");
+	floor.newE();
+    }
+
+    private void initWallTypes() throws Exception
+    {
+	WallType wallType;
+
+	wallType = new WallType();
+	wallType.setData("Name", "nord-ouest");
+	wallType.newE();
+
+	wallType = new WallType();
+	wallType.setData("Name", "nord-est");
+	wallType.newE();
+
+	wallType = new WallType();
+	wallType.setData("Name", "est-nord");
+	wallType.newE();
+
+	wallType = new WallType();
+	wallType.setData("Name", "est-sud");
+	wallType.newE();
+
+	wallType = new WallType();
+	wallType.setData("Name", "sud-est");
+	wallType.newE();
+
+	wallType = new WallType();
+	wallType.setData("Name", "sud-ouest");
+	wallType.newE();
+
+	wallType = new WallType();
+	wallType.setData("Name", "ouest-sud");
+	wallType.newE();
+
+	wallType = new WallType();
+	wallType.setData("Name", "ouest-nord");
+	wallType.newE();
     }
 
     private void initPermissions() throws Exception

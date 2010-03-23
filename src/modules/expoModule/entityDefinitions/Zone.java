@@ -24,8 +24,7 @@ public class Zone extends AbstractOrmEntity
 	setVisibleName("Zone");
 	AccessorManager.addAccessor(this, new Floor());
 	AccessorManager.addAccessor(this, new KioskCustomer());
-	AccessorManager.addAccessor(this, new InternetConnectionType());
-	AccessorManager.addAccessor(this, new WallType());
+	// AccessorManager.addAccessor(this, new InternetConnectionType());
     }
 
     public Fields initFields() throws Exception
@@ -36,24 +35,25 @@ public class Zone extends AbstractOrmEntity
 	fieldList.add(pKzoneID);
 
 	FieldInt positionX = new FieldInt("Position X", "PositionX");
+	positionX.setNaturalKey(true);
 	fieldList.add(positionX);
 
 	FieldInt positionY = new FieldInt("Position Y", "PositionY");
+	positionY.setNaturalKey(true);
 	fieldList.add(positionY);
 
 	FieldInt plugCount = new FieldInt("Nombre de prises électriques",
 		"PlugCount");
 	fieldList.add(plugCount);
 
-	FieldInt client = new FieldInt("Connexion internet",
-		"internetConnectionTypeID");
+	/*
+	 * FieldInt client = new FieldInt("Connexion internet",
+	 * "internetConnectionTypeID"); fieldList.add(client);
+	 */
+
+	FieldInt client = new FieldInt("Client", "kioskCustomerID");
+	client.setNaturalKey(true);
 	fieldList.add(client);
-
-	FieldInt connection = new FieldInt("Client", "kioskCustomerID");
-	fieldList.add(connection);
-
-	FieldInt wallType = new FieldInt("Type de mur", "wallTypeID");
-	fieldList.add(wallType);
 
 	FieldInt floorID = new FieldInt("Plancher", "floorID");
 	fieldList.add(floorID);

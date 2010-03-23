@@ -21,7 +21,7 @@ public class WallType extends AbstractOrmEntity
     public WallType() throws Exception
     {
 	super();
-	setVisibleName("Type de muret");
+	setVisibleName("Emplacement de muret");
     }
 
     public Fields initFields() throws Exception
