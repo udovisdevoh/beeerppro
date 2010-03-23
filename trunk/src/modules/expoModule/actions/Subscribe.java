@@ -4,6 +4,7 @@ import java.util.GregorianCalendar;
 import java.util.Hashtable;
 
 import modules.expoModule.entityDefinitions.CompanyDomain;
+import modules.expoModule.entityDefinitions.InternetConnectionType;
 import modules.expoModule.entityDefinitions.KioskCustomer;
 import modules.userRightModule.UserRightModule;
 import modules.userRightModule.entityDefinitions.Groups;
@@ -60,6 +61,11 @@ public class Subscribe extends AbstractAction
 		groups.setData("groupName", "expoGroup");
 		groups = (Groups) groups.get().get(0);
 
+		InternetConnectionType internetConnectionType = new InternetConnectionType();
+		internetConnectionType.setData("Name", "aucune");
+		internetConnectionType = (InternetConnectionType) internetConnectionType
+			.get().get(0);
+
 		user.setData("groupsID", groups.getPrimaryKeyValue());
 		user.setData("password", currentPassword);
 		user.newE();
@@ -71,9 +77,11 @@ public class Subscribe extends AbstractAction
 		KioskCustomer kioskCustomer = new KioskCustomer();
 		kioskCustomer.assign(user);
 		kioskCustomer.assign(companyDomain);
+		kioskCustomer.assign(internetConnectionType);
 		kioskCustomer.setData("Company", currentLoginName);
 		kioskCustomer.getFields().getField("Date").setData(
 			new GregorianCalendar());
+
 		kioskCustomer.newE();
 
 		Authentication.setCurrentUserName(currentLoginName);

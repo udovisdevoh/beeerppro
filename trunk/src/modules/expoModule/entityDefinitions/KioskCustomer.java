@@ -24,9 +24,10 @@ public class KioskCustomer extends AbstractOrmEntity
     public KioskCustomer() throws Exception
     {
 	super();
-	setVisibleName("Client de kiosque");
+	setVisibleName("Kiosque");
 	AccessorManager.addAccessor(this, new CompanyDomain());
 	AccessorManager.addAccessor(this, new User());
+	AccessorManager.addAccessor(this, new InternetConnectionType());
     }
 
     public Fields initFields() throws Exception
@@ -56,6 +57,10 @@ public class KioskCustomer extends AbstractOrmEntity
 	FieldInt user = new FieldInt("Utilisateur", "userID");
 	user.setReadOnly(true);
 	fieldList.add(user);
+
+	FieldInt internetConnectionType = new FieldInt("Connexion internet",
+		new InternetConnectionType().getForeignKeyName());
+	fieldList.add(internetConnectionType);
 
 	FieldDateTime date = new FieldDateTime("Date d`inscription", "Date");
 	date.setReadOnly(true);
