@@ -1,6 +1,7 @@
 package modules.expoModule;
 
 import modules.expoModule.entityDefinitions.CompanyDomain;
+import modules.expoModule.entityDefinitions.Corridor;
 import modules.expoModule.entityDefinitions.Floor;
 import modules.expoModule.entityDefinitions.InternetConnectionType;
 import modules.expoModule.entityDefinitions.Option;
@@ -66,6 +67,29 @@ public class ExpoModule extends Module
 	floor.setData("Width", 13);
 	floor.setData("Height", 11);
 	floor.newE();
+
+	addCorridor(floor, true, 0);
+	addCorridor(floor, true, 2);
+	addCorridor(floor, true, 7);
+	addCorridor(floor, true, 10);
+	addCorridor(floor, true, 12);
+
+	addCorridor(floor, false, 0);
+	addCorridor(floor, false, 2);
+	addCorridor(floor, false, 5);
+	addCorridor(floor, false, 8);
+	addCorridor(floor, false, 10);
+    }
+
+    private void addCorridor(Floor floor, boolean isVertical, int position)
+	    throws Exception
+    {
+	Corridor corridor;
+	corridor = new Corridor();
+	corridor.assign(floor);
+	corridor.setData("IsVertical", isVertical);
+	corridor.setData("Position", position);
+	corridor.newE();
     }
 
     private void initWallTypes() throws Exception
