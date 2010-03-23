@@ -53,4 +53,16 @@ public class Zone extends AbstractOrmEntity
 	fieldList.add(floorID);
 	return new Fields(fieldList);
     }
+
+    /**
+     * @return retourne le nom de kiosque associé à cette zone
+     * @throws Exception si ça fail
+     */
+    public String getKioskName() throws Exception
+    {
+	KioskCustomer kioskCustomer = (KioskCustomer) AccessorManager
+		.getSingleAccessor(this, "KioskCustomer");
+
+	return kioskCustomer.getNaturalKeyDescription();
+    }
 }

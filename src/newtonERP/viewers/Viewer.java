@@ -12,6 +12,7 @@ import newtonERP.serveur.ConfigManager;
 import newtonERP.serveur.Servlet;
 import newtonERP.viewers.firstStep.AlertViewer;
 import newtonERP.viewers.firstStep.BaseViewer;
+import newtonERP.viewers.firstStep.FloorViewer;
 import newtonERP.viewers.firstStep.ForwardViewer;
 import newtonERP.viewers.firstStep.GridViewer;
 import newtonERP.viewers.firstStep.ImgViewer;
@@ -19,6 +20,7 @@ import newtonERP.viewers.firstStep.PromptViewer;
 import newtonERP.viewers.firstStep.SplashScreenViewer;
 import newtonERP.viewers.firstStep.StaticTextViewer;
 import newtonERP.viewers.viewables.AlertViewable;
+import newtonERP.viewers.viewables.FloorViewable;
 import newtonERP.viewers.viewables.ForwardViewable;
 import newtonERP.viewers.viewables.StaticTextViewable;
 import newtonERP.viewers.viewerData.BaseViewerData;
@@ -51,7 +53,9 @@ public abstract class Viewer
 	if (entity instanceof BaseViewerData)
 	    viewerHtml += BaseViewer.getTopHtmlCode((BaseViewerData) entity);
 
-	if (entity instanceof PromptViewerData)
+	if (entity instanceof FloorViewable)
+	    viewerHtml += FloorViewer.getHtmlCode((FloorViewable) entity);
+	else if (entity instanceof PromptViewerData)
 	    viewerHtml += PromptViewer.getHtmlCode((PromptViewerData) entity);
 	else if (entity instanceof ForwardViewable)
 	    viewerHtml += ForwardViewer.getHtmlCode((ForwardViewable) entity);
