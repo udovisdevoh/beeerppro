@@ -33,6 +33,13 @@ public class Floor extends AbstractOrmEntity
 
 	FieldString nom = new FieldString("Description", "Nom");
 	fieldList.add(nom);
+
+	FieldInt width = new FieldInt("Largeur", "Width");
+	fieldList.add(width);
+
+	FieldInt height = new FieldInt("Hauteur", "Height");
+	fieldList.add(height);
+
 	return new Fields(fieldList);
     }
 }
