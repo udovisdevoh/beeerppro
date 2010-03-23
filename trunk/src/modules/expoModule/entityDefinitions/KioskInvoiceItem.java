@@ -38,12 +38,29 @@ public class KioskInvoiceItem extends AbstractOrmEntity
 	fieldList.add(invoice);
 
 	FieldInt option = new FieldInt("Option", "optionID");
+	option.setNaturalKey(true);
 	fieldList.add(option);
 
 	FieldInt amount = new FieldInt("Quantité", "amount");
+	amount.setNaturalKey(true);
 	fieldList.add(amount);
 
 	return new Fields(fieldList);
     }
 
+    /**
+     * @return total de l'item de facture
+     * @throws Exception si ça fail
+     */
+    public double getTotal() throws Exception
+    {
+	double amount = Double.parseDouble(getDataString("amount"));
+	double price = getOption().getPrice();
+	return amount * price;
+    }
+
+    private Option getOption() throws Exception
+    {
+	return (Option) AccessorManager.getSingleAccessor(this, "optionID");
+    }
 }

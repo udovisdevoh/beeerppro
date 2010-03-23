@@ -27,14 +27,27 @@ public class ExpoModule extends Module
     {
 	super.initDB();
 
+	initPermissions();
+	initCompanyDomains();
+	initOptions();
+    }
+
+    private void initPermissions() throws Exception
+    {
 	Groups groups;
 
 	groups = new Groups();
 	groups.setData("groupName", "expoGroup");
 	groups.newE();
 
-	initCompanyDomains();
-	initOptions();
+	UserRightModule userRightModule = (UserRightModule) ListModule
+		.getModule("UserRightModule");
+
+	userRightModule.addGroupsRight("unLogedGroup", "ShowSplashScreen");
+	userRightModule.addGroupsRight("unLogedGroup", "Subscribe");
+
+	userRightModule.addGroupsRight("expoGroup", "Logout");
+	userRightModule.addGroupsRight("expoGroup", "ShowSplashScreen");
     }
 
     private void initOptions() throws Exception
@@ -131,14 +144,5 @@ public class ExpoModule extends Module
 	companyDomain = new CompanyDomain();
 	companyDomain.setData("Name", "enseignement");
 	companyDomain.newE();
-
-	UserRightModule userRightModule = (UserRightModule) ListModule
-		.getModule("UserRightModule");
-
-	userRightModule.addGroupsRight("unLogedGroup", "ShowSplashScreen");
-	userRightModule.addGroupsRight("unLogedGroup", "Subscribe");
-
-	userRightModule.addGroupsRight("expoGroup", "Logout");
-	userRightModule.addGroupsRight("expoGroup", "ShowSplashScreen");
     }
 }

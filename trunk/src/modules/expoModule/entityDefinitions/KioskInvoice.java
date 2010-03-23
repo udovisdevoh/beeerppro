@@ -5,7 +5,9 @@ import java.util.Vector;
 import newtonERP.module.AbstractOrmEntity;
 import newtonERP.orm.associations.AccessorManager;
 import newtonERP.orm.field.Field;
+import newtonERP.orm.field.FieldCalcule;
 import newtonERP.orm.field.Fields;
+import newtonERP.orm.field.type.FieldCurrency;
 import newtonERP.orm.field.type.FieldInt;
 
 /**
@@ -30,11 +32,37 @@ public class KioskInvoice extends AbstractOrmEntity
 	Vector<Field<?>> fieldList = new Vector<Field<?>>();
 
 	FieldInt pKkioskInvoiceID = new FieldInt("Numéro", getPrimaryKeyName());
+	pKkioskInvoiceID.setNaturalKey(true);
 	fieldList.add(pKkioskInvoiceID);
 
 	FieldInt client = new FieldInt("Client", "kioskCustomerID");
+	client.setNaturalKey(true);
 	fieldList.add(client);
 
+	FieldCurrency total = new FieldCurrency("Total", "total");
+	total.setCalcul(new FieldCalculeTotal());
+	fieldList.add(total);
+
 	return new Fields(fieldList);
+    }
+
+    private class FieldCalculeTotal extends FieldCalcule<Double>
+    {
+	@Override
+	protected Double calcul(Fields entityFields) throws Exception
+	{
+	    double total = 0;
+
+	    KioskInvoiceItem kioskInvoiceItem = new KioskInvoiceItem();
+	    kioskInvoiceItem.setData("kioskInvoiceID", entityFields.getField(
+		    "PKkioskInvoiceID").getDataString());
+	    Vector<AbstractOrmEntity> kioskInvoiceItemList = kioskInvoiceItem
+		    .get();
+
+	    for (AbstractOrmEntity invoiceItem : kioskInvoiceItemList)
+		total += ((KioskInvoiceItem) invoiceItem).getTotal();
+
+	    return total;
+	}
     }
 }
