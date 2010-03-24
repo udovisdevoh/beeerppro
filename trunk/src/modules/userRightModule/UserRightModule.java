@@ -180,8 +180,22 @@ public class UserRightModule extends Module
 
 	Right right = tryGetRight(actionName, entityName);
 
+	if (right == null)
+	    right = tryGetRight(actionName);
+
 	return isGroupsRightExists(groups.getPrimaryKeyValue(), right
 		.getPrimaryKeyValue());
+    }
+
+    private Right tryGetRight(String actionName) throws Exception
+    {
+	Right right = new Right();
+	right.setData("actionName", actionName);
+
+	Vector<AbstractOrmEntity> rightList = right.get();
+	if (rightList.size() > 0)
+	    return (Right) rightList.get(0);
+	return null;
     }
 
     private Right tryGetRight(String actionName, String entityName)
