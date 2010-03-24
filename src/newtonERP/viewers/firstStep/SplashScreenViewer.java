@@ -27,7 +27,9 @@ public class SplashScreenViewer
 	htmlCode += "<ul>";
 	for (ActionLink link : entity.getActionLinkList())
 	{
-	    htmlCode += "<li>" + LinkViewer.getHtmlCode(link) + "</li>";
+	    String currentLinkHtml = LinkViewer.getHtmlCode(link);
+	    if (currentLinkHtml.length() > 0)
+		htmlCode += "<li>" + currentLinkHtml + "</li>";
 	}
 	htmlCode += "</ul>";
 
