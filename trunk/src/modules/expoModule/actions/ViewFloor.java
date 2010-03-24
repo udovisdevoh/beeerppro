@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import modules.expoModule.entityDefinitions.Floor;
 import newtonERP.module.AbstractAction;
 import newtonERP.module.AbstractEntity;
+import newtonERP.viewers.viewerData.FloorViewerData;
 
 /**
  * Sert à voir le plancher
@@ -21,9 +22,11 @@ public class ViewFloor extends AbstractAction
     }
 
     @Override
-    public AbstractEntity doAction(AbstractEntity entity,
+    public FloorViewerData doAction(AbstractEntity entity,
 	    Hashtable<String, String> parameters) throws Exception
     {
-	return entity;
+	Floor floor = (Floor) entity;
+	FloorViewerData floorViewerData = new FloorViewerData(floor);
+	return floorViewerData;
     }
 }

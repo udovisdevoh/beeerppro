@@ -1,5 +1,6 @@
 package newtonERP.viewers.viewerData;
 
+import modules.expoModule.entityDefinitions.Floor;
 import newtonERP.module.AbstractEntity;
 import newtonERP.viewers.viewables.FloorViewable;
 
@@ -9,7 +10,13 @@ import newtonERP.viewers.viewables.FloorViewable;
  */
 public class FloorViewerData extends AbstractEntity implements FloorViewable
 {
+    private int columnCount = 0;
+
+    private int rowCount = 0;
+
     private Boolean[][] corridorMask;
+
+    private String[][] zoneNameMap;
 
     /**
      * @throws Exception si ça fail
@@ -17,34 +24,55 @@ public class FloorViewerData extends AbstractEntity implements FloorViewable
     public FloorViewerData() throws Exception
     {
 	super();
-	// TODO Auto-generated constructor stub
+    }
+
+    public FloorViewerData(Floor sourceFloor) throws Exception
+    {
+	super();
+
+	sourceFloor = (Floor) sourceFloor.get().get(0);
+
+	columnCount = sourceFloor.getColumnCount();
+	rowCount = sourceFloor.getRowCount();
+	corridorMask = new Boolean[columnCount][rowCount];
+	zoneNameMap = new String[columnCount][rowCount];
+
+	for (int x = 0; x < columnCount; x++)
+	{
+	    for (int y = 0; y < rowCount; y++)
+	    {
+		zoneNameMap[x][y] = sourceFloor.getZoneNameAt(x, y);
+		corridorMask[x][y] = sourceFloor.isCorridorAt(x, y);
+	    }
+	}
     }
 
     @Override
     public int getColumnCount()
     {
-	// TODO Auto-generated method stub
-	return 0;
+	return columnCount;
     }
 
     @Override
     public int getRowCount()
     {
-	// TODO Auto-generated method stub
-	return 0;
+	return rowCount;
     }
 
     @Override
     public boolean isCorridorAt(int x, int y)
     {
-	// TODO Auto-generated method stub
-	return false;
+	if (corridorMask == null)
+	    return false;
+
+	return corridorMask[x][y];
     }
 
     @Override
     public String tryGetZoneNameAt(int x, int y) throws Exception
     {
-	// TODO Auto-generated method stub
-	return null;
+	if (zoneNameMap == null)
+	    return "-";
+	return zoneNameMap[x][y];
     }
 }

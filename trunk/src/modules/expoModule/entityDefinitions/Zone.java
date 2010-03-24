@@ -61,7 +61,7 @@ public class Zone extends AbstractOrmEntity
     public String getKioskName() throws Exception
     {
 	KioskCustomer kioskCustomer = (KioskCustomer) AccessorManager
-		.getSingleAccessor(this, "KioskCustomer");
+		.getSingleAccessor(this, "kioskCustomerID");
 
 	return kioskCustomer.getNaturalKeyDescription();
     }
