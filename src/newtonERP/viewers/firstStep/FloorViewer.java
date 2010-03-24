@@ -45,7 +45,8 @@ public class FloorViewer
 		    }
 		}
 
-		html += "<td style=\"background-color:" + currentColor + "\">";
+		html += "<td style=\"background-color:" + currentColor
+			+ ";width:32px;height:32px\">";
 		html += currentText;
 		html += "</td>";
 	    }
