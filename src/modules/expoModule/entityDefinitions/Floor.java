@@ -7,6 +7,7 @@ import java.util.Vector;
 import modules.expoModule.actions.ViewFloor;
 import newtonERP.common.ActionLink;
 import newtonERP.module.AbstractOrmEntity;
+import newtonERP.module.BaseAction;
 import newtonERP.orm.associations.AccessorManager;
 import newtonERP.orm.associations.PluralAccessor;
 import newtonERP.orm.field.Field;
@@ -22,6 +23,8 @@ import newtonERP.viewers.viewerData.ListViewerData;
 public class Floor extends AbstractOrmEntity
 {
     private PluralAccessor lazyCorridorList = null;
+
+    private Hashtable<String, String> zoneIdParameters = new Hashtable<String, String>();
 
     /**
      * constructor
@@ -136,5 +139,34 @@ public class Floor extends AbstractOrmEntity
 		new ViewFloor(), parameters));
 
 	return entityList;
+    }
+
+    /**
+     * @param x position x
+     * @param y position y
+     * @return liste des actionLink à la position spécifiée
+     * @throws Exception si ça fail
+     */
+    public Vector<ActionLink> getActionLinkListAt(int x, int y)
+	    throws Exception
+    {
+	Zone zone = new Zone();
+	zone.setData("PositionX", x);
+	zone.setData("PositionY", y);
+
+	Vector<AbstractOrmEntity> zoneList = zone.get();
+	if (zoneList.size() < 1)
+	    return new Vector<ActionLink>();
+
+	zone = (Zone) zoneList.get(0);
+
+	zoneIdParameters.put(zone.getPrimaryKeyName(), zone
+		.getPrimaryKeyValue().toString());
+
+	Vector<ActionLink> actionLinkList = new Vector<ActionLink>();
+	actionLinkList.add(new ActionLink("Administrer", new BaseAction("Edit",
+		zone), zoneIdParameters));
+
+	return actionLinkList;
     }
 }

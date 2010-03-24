@@ -1,5 +1,9 @@
 package newtonERP.viewers.viewables;
 
+import java.util.Vector;
+
+import newtonERP.common.ActionLink;
+
 /**
  * Ce qui peut être vu en tant que plan 2D comportant des salles et des
  * corridors
@@ -31,4 +35,12 @@ public interface FloorViewable
      * @throws Exception si ça fail
      */
     String tryGetZoneNameAt(int x, int y) throws Exception;
+
+    /**
+     * @param x position x
+     * @param y position y
+     * @return liste des actionLink pour la position spécifiée
+     * @throws Exception
+     */
+    Vector<ActionLink> getActionLinkListAt(int x, int y) throws Exception;
 }

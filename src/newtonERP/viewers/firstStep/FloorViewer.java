@@ -1,5 +1,9 @@
 package newtonERP.viewers.firstStep;
 
+import java.util.Vector;
+
+import newtonERP.common.ActionLink;
+import newtonERP.viewers.secondStep.LinkViewer;
 import newtonERP.viewers.secondStep.colorViewer.ColorViewer;
 import newtonERP.viewers.viewables.FloorViewable;
 
@@ -46,8 +50,20 @@ public class FloorViewer
 		}
 
 		html += "<td style=\"background-color:" + currentColor
-			+ ";width:32px;height:32px\">";
+			+ ";width:64px;height:64px\">";
+
 		html += currentText;
+
+		Vector<ActionLink> actionLinkList = entity.getActionLinkListAt(
+			x, y);
+
+		for (ActionLink link : actionLinkList)
+		{
+		    String currentLinkCode = LinkViewer.getHtmlCode(link);
+		    if (currentLinkCode.length() > 0)
+			html += currentLinkCode;
+		}
+
 		html += "</td>";
 	    }
 	    html += "</tr>";
