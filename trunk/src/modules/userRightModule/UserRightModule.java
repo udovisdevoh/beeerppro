@@ -158,6 +158,11 @@ public class UserRightModule extends Module
 		right.getPrimaryKeyValue().toString());
     }
 
+    /**
+     * @param actionLink un actionLink
+     * @return vrai si les permission sont présentement accordées, sinon, faux
+     * @throws Exception si ça fail
+     */
     public boolean isPermissionAllowed(ActionLink actionLink) throws Exception
     {
 	String userName = Authentication.getCurrentUserName();
@@ -176,7 +181,10 @@ public class UserRightModule extends Module
 	else
 	    entity = action.getEntityUsable();
 
-	entityName = entity.getSystemName();
+	if (entity == null)
+	    entityName = "";
+	else
+	    entityName = entity.getSystemName();
 
 	Right right = tryGetRight(actionName, entityName);
 
