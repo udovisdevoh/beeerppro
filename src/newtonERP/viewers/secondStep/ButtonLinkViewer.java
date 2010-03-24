@@ -2,7 +2,9 @@ package newtonERP.viewers.secondStep;
 
 import java.util.Hashtable;
 
+import modules.userRightModule.UserRightModule;
 import newtonERP.common.ActionLink;
+import newtonERP.common.ListModule;
 import newtonERP.module.AbstractEntity;
 import newtonERP.module.AbstractOrmEntity;
 
@@ -24,35 +26,55 @@ public class ButtonLinkViewer
 	    AbstractEntity entity) throws Exception
     {
 	String html = "";
-	String onClickConfirm = "";
 
-	if (actionLink.isConfirm())
-	    onClickConfirm = getOnClickConfirm(actionLink.getName(), entity
-		    .getSystemName(), ((AbstractOrmEntity) entity)
-		    .getNaturalKeyDescription());
-
-	html += "<ins>";
-
-	html += "<form method='get' action='" + actionLink.getUrl() + "'>";
-
-	html += "<div>";
-
-	Hashtable<String, String> param = actionLink.getParameters(entity);
-	for (String key : param.keySet())
+	if (isPermissionAllowed(actionLink))
 	{
-	    html += "<input type='hidden' name='" + key + "' value='"
-		    + param.get(key) + "' />";
+
+	    String onClickConfirm = "";
+
+	    if (actionLink.isConfirm())
+		onClickConfirm = getOnClickConfirm(actionLink.getName(), entity
+			.getSystemName(), ((AbstractOrmEntity) entity)
+			.getNaturalKeyDescription());
+
+	    html += "<ins>";
+
+	    html += "<form method='get' action='" + actionLink.getUrl() + "'>";
+
+	    html += "<div>";
+
+	    Hashtable<String, String> param = actionLink.getParameters(entity);
+	    for (String key : param.keySet())
+	    {
+		html += "<input type='hidden' name='" + key + "' value='"
+			+ param.get(key) + "' />";
+	    }
+	    html += "<input class='submitButton' type='submit' "
+		    + onClickConfirm + " value=\"" + actionLink.getName()
+		    + "\" />";
+
+	    html += "</div>";
+
+	    html += "</form>";
+
+	    html += "</ins>";
 	}
-	html += "<input class='submitButton' type='submit' " + onClickConfirm
-		+ " value=\"" + actionLink.getName() + "\" />";
-
-	html += "</div>";
-
-	html += "</form>";
-
-	html += "</ins>";
+	else
+	{
+	    // html += "<i style=\"font-size:8px\">" + actionLink.getName()
+	    // + "</i>";
+	}
 
 	return html;
+    }
+
+    private static boolean isPermissionAllowed(ActionLink actionLink)
+	    throws Exception
+    {
+	UserRightModule userRightModule = (UserRightModule) ListModule
+		.getModule("UserRightModule");
+
+	return userRightModule.isPermissionAllowed(actionLink);
     }
 
     /**
