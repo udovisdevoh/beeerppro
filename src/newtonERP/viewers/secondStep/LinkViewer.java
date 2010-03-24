@@ -1,6 +1,8 @@
 package newtonERP.viewers.secondStep;
 
+import modules.userRightModule.UserRightModule;
 import newtonERP.common.ActionLink;
+import newtonERP.common.ListModule;
 
 /**
  * Sert à formatter de l'argent
@@ -27,8 +29,12 @@ public class LinkViewer
 	 */
 
 	String html = "";
-	html += " <a href='" + actionLink.getUrlParam() + "'>";
-	html += actionLink.getName() + "</a> ";
+
+	if (isPermissionAllowed(actionLink))
+	{
+	    html += " <a href='" + actionLink.getUrlParam() + "'>";
+	    html += actionLink.getName() + "</a> ";
+	}
 
 	return html;
 
@@ -50,5 +56,14 @@ public class LinkViewer
 	html += "\"";
 
 	return html;
+    }
+
+    private static boolean isPermissionAllowed(ActionLink actionLink)
+	    throws Exception
+    {
+	UserRightModule userRightModule = (UserRightModule) ListModule
+		.getModule("UserRightModule");
+
+	return userRightModule.isPermissionAllowed(actionLink);
     }
 }
