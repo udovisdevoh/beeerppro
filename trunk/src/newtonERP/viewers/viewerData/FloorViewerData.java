@@ -1,6 +1,9 @@
 package newtonERP.viewers.viewerData;
 
+import java.util.Vector;
+
 import modules.expoModule.entityDefinitions.Floor;
+import newtonERP.common.ActionLink;
 import newtonERP.module.AbstractEntity;
 import newtonERP.viewers.viewables.FloorViewable;
 
@@ -18,6 +21,8 @@ public class FloorViewerData extends AbstractEntity implements FloorViewable
 
     private String[][] zoneNameMap;
 
+    private Floor sourceFloor = null;
+
     /**
      * @throws Exception si ça fail
      */
@@ -33,6 +38,7 @@ public class FloorViewerData extends AbstractEntity implements FloorViewable
     public FloorViewerData(Floor sourceFloor) throws Exception
     {
 	super();
+	this.sourceFloor = sourceFloor;
 
 	sourceFloor = (Floor) sourceFloor.get().get(0);
 
@@ -78,5 +84,15 @@ public class FloorViewerData extends AbstractEntity implements FloorViewable
 	if (zoneNameMap == null)
 	    return "-";
 	return zoneNameMap[x][y];
+    }
+
+    @Override
+    public Vector<ActionLink> getActionLinkListAt(int x, int y)
+	    throws Exception
+    {
+	if (sourceFloor == null)
+	    return new Vector<ActionLink>();
+
+	return sourceFloor.getActionLinkListAt(x, y);
     }
 }

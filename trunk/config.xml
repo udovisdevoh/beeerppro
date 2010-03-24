@@ -8,8 +8,8 @@
 	<display-name>Expo</display-name>
 	<dmbs-name>sqlite</dmbs-name>
 	<default-user name="admin" password="aaa" />
-	<default-module>UserRightModule</default-module>
-	<default-action>Login</default-action>
+	<default-module>ExpoModule</default-module>
+	<default-action>ShowSplashScreen</default-action>
 	<style-screen>/file/styleScreen.css</style-screen>
 	<style-print>/file/stylePrint.css</style-print>
 	<port>47098</port>
