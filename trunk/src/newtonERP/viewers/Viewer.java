@@ -3,8 +3,10 @@ package newtonERP.viewers;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import newtonERP.common.ActionLink;
 import newtonERP.common.Authentication;
 import newtonERP.common.ListModule;
+import newtonERP.module.AbstractAction;
 import newtonERP.module.AbstractEntity;
 import newtonERP.module.Module;
 import newtonERP.module.generalEntity.SplashScreen;
@@ -19,6 +21,7 @@ import newtonERP.viewers.firstStep.ImgViewer;
 import newtonERP.viewers.firstStep.PromptViewer;
 import newtonERP.viewers.firstStep.SplashScreenViewer;
 import newtonERP.viewers.firstStep.StaticTextViewer;
+import newtonERP.viewers.secondStep.LinkViewer;
 import newtonERP.viewers.viewables.AlertViewable;
 import newtonERP.viewers.viewables.FloorViewable;
 import newtonERP.viewers.viewables.ForwardViewable;
@@ -186,12 +189,17 @@ public abstract class Viewer
 			    .getGlobalActionMenuOrReturnDefaultBehavior()
 			    .getKeyList())
 		    {
-			menuModuleHtml += "<li><a href=\"";
-			menuModuleHtml += Servlet.makeLink(module, module
+			AbstractAction defaultAction = module
 				.getGlobalActionMenuOrReturnDefaultBehavior()
-				.get(globalActionName));
-			menuModuleHtml += "\">" + globalActionName
-				+ "</a></li>";
+				.get(globalActionName);
+
+			String currentLinkHtml = LinkViewer
+				.getHtmlCode(new ActionLink(globalActionName,
+					defaultAction));
+
+			if (currentLinkHtml.length() > 0)
+			    menuModuleHtml += "<li>" + currentLinkHtml
+				    + "</li>";
 		    }
 		}
 		else
