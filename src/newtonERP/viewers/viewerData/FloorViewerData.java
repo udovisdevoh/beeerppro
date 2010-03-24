@@ -26,6 +26,10 @@ public class FloorViewerData extends AbstractEntity implements FloorViewable
 	super();
     }
 
+    /**
+     * @param sourceFloor source floor
+     * @throws Exception si ça fail
+     */
     public FloorViewerData(Floor sourceFloor) throws Exception
     {
 	super();

@@ -52,6 +52,12 @@ public class Floor extends AbstractOrmEntity
 	return new Fields(fieldList);
     }
 
+    /**
+     * @param x x position
+     * @param y y position
+     * @return s'il y a un corridor
+     * @throws Exception si ça fail
+     */
     public boolean isCorridorAt(int x, int y) throws Exception
     {
 	for (AbstractOrmEntity entity : getLazyCorridorList())
@@ -82,16 +88,28 @@ public class Floor extends AbstractOrmEntity
 	return lazyCorridorList;
     }
 
+    /**
+     * @return combien de ranger
+     */
     public int getRowCount()
     {
 	return (Integer) getData("Height");
     }
 
+    /**
+     * @return combien de colonnes
+     */
     public int getColumnCount()
     {
 	return (Integer) getData("Width");
     }
 
+    /**
+     * @param x position x
+     * @param y position y
+     * @return nom de la zone
+     * @throws Exception si ça fail
+     */
     public String getZoneNameAt(int x, int y) throws Exception
     {
 	Zone zone = new Zone();
