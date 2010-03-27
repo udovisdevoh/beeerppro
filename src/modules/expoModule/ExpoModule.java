@@ -146,6 +146,8 @@ public class ExpoModule extends Module
 	userRightModule.addGroupsRight("expoGroup", "Logout");
 	userRightModule.addGroupsRight("expoGroup", "ShowSplashScreen");
 	userRightModule.addGroupsRight("expoGroup", "ViewFloor");
+
+	userRightModule.addGroupsRight("expoGroup", "GetList", "Floor");
     }
 
     private void initOptions() throws Exception

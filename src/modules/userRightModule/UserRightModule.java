@@ -122,6 +122,26 @@ public class UserRightModule extends Module
     }
 
     /**
+     * @param groupName nom du groupe
+     * @param actionName nom de l'action
+     * @param entityName nom de l'entité
+     * @throws Exception si ça fail
+     */
+    public void addGroupsRight(String groupName, String actionName,
+	    String entityName) throws Exception
+    {
+	Groups groups = (Groups) Orm.getOrCreateEntity(new Groups(),
+		"groupName", groupName);
+	Right right = (Right) Orm.getOrCreateEntity(new Right(), "actionName",
+		actionName, "entityName", entityName);
+
+	Orm.getOrCreateEntity(new GroupsRight(), groups.getForeignKeyName(),
+		groups.getPrimaryKeyValue().toString(), right
+			.getForeignKeyName(), right.getPrimaryKeyValue()
+			.toString());
+    }
+
+    /**
      * @param groupName group's name
      * @param rightActionName right's name
      * @throws Exception si ça fail
