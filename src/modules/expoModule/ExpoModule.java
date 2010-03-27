@@ -9,6 +9,7 @@ import modules.expoModule.entityDefinitions.WallType;
 import modules.userRightModule.UserRightModule;
 import modules.userRightModule.entityDefinitions.Groups;
 import newtonERP.common.ListModule;
+import newtonERP.module.BaseAction;
 import newtonERP.module.Module;
 
 /**
@@ -24,6 +25,7 @@ public class ExpoModule extends Module
     public ExpoModule() throws Exception
     {
 	super();
+	setDefaultAction(new BaseAction("GetList", new Floor()));
 	setVisibleName("Module d`exposition");
     }
 
