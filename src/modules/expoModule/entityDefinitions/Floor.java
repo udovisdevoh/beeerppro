@@ -118,6 +118,7 @@ public class Floor extends AbstractOrmEntity
 	Zone zone = new Zone();
 	zone.setData("PositionX", x);
 	zone.setData("PositionY", y);
+	zone.setData(getForeignKeyName(), getPrimaryKeyValue());
 
 	Vector<AbstractOrmEntity> zoneList = zone.get();
 	if (zoneList.size() < 1)
@@ -139,6 +140,7 @@ public class Floor extends AbstractOrmEntity
 	Zone zone = new Zone();
 	zone.setData("PositionX", x);
 	zone.setData("PositionY", y);
+	zone.setData(getForeignKeyName(), getPrimaryKeyValue());
 
 	Vector<AbstractOrmEntity> zoneList = zone.get();
 	if (zoneList.size() < 1)
@@ -174,6 +176,7 @@ public class Floor extends AbstractOrmEntity
 	Zone zone = new Zone();
 	zone.setData("PositionX", x);
 	zone.setData("PositionY", y);
+	zone.setData(getForeignKeyName(), getPrimaryKeyValue());
 
 	Vector<AbstractOrmEntity> zoneList = zone.get();
 	if (zoneList.size() < 1)
