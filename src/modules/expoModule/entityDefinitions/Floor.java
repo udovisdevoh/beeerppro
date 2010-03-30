@@ -110,28 +110,6 @@ public class Floor extends AbstractOrmEntity
     /**
      * @param x position x
      * @param y position y
-     * @return nom de la zone
-     * @throws Exception si ça fail
-     */
-    public String getZoneNameAt(int x, int y) throws Exception
-    {
-	Zone zone = new Zone();
-	zone.setData("PositionX", x);
-	zone.setData("PositionY", y);
-	zone.setData(getForeignKeyName(), getPrimaryKeyValue());
-
-	Vector<AbstractOrmEntity> zoneList = zone.get();
-	if (zoneList.size() < 1)
-	    return "-";
-
-	zone = (Zone) zoneList.get(0);
-
-	return zone.getKioskName();
-    }
-
-    /**
-     * @param x position x
-     * @param y position y
      * @return zone aux positions spécifiées ou null si rien trouvé
      * @throws Exception si ça fail
      */
