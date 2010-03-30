@@ -43,4 +43,12 @@ public interface FloorViewable
      * @throws Exception
      */
     Vector<ActionLink> getActionLinkListAt(int x, int y) throws Exception;
+
+    /**
+     * @param string nom de type de mur
+     * @param x position x de zone
+     * @param y position y de zone
+     * @return vrai s'il y a un mur à la position indiquée
+     */
+    boolean isWallAt(String string, int x, int y);
 }

@@ -13,6 +13,9 @@ import newtonERP.viewers.viewables.FloorViewable;
  */
 public class FloorViewer
 {
+    private static final String noWallColor = "#333";
+
+    private static final String wallColor = "#AAA";
 
     /**
      * @param entity entité de plancher
@@ -23,7 +26,7 @@ public class FloorViewer
     {
 	String html = "";
 
-	html += "<table>";
+	html += "<table cellspacing=\"0\" border=\"0\" cellpadding=\"0\">";
 
 	int columnCount = entity.getColumnCount();
 	for (int y = 0; y < entity.getRowCount(); y++)
@@ -49,25 +52,111 @@ public class FloorViewer
 		    }
 		}
 
-		html += "<td style=\"background-color:" + currentColor
-			+ ";width:64px;height:64px\">";
+		html += "<td style=\"width:64px;height:64px\">";
 
-		html += currentText;
-
-		Vector<ActionLink> actionLinkList = entity.getActionLinkListAt(
-			x, y);
-
-		for (ActionLink link : actionLinkList)
-		{
-		    String currentLinkCode = LinkViewer.getHtmlCode(link);
-		    if (currentLinkCode.length() > 0)
-			html += currentLinkCode;
-		}
+		html += getRoomHtml(currentText, currentColor, entity, x, y);
 
 		html += "</td>";
 	    }
 	    html += "</tr>";
 	}
+	html += "</table>";
+
+	return html;
+    }
+
+    private static String getRoomHtml(String currentText,
+	    String backgroundColor, FloorViewable entity, int x, int y)
+	    throws Exception
+    {
+	String html = "";
+
+	String northWestColor = noWallColor;
+	String northEastColor = noWallColor;
+	String southWestColor = noWallColor;
+	String southEastColor = noWallColor;
+	String eastNorthColor = noWallColor;
+	String eastSouthColor = noWallColor;
+	String westNorthColor = noWallColor;
+	String westSouthColor = noWallColor;
+
+	if (entity.isWallAt("nord-ouest", x, y))
+	    northWestColor = wallColor;
+	if (entity.isWallAt("nord-est", x, y))
+	    northEastColor = wallColor;
+	if (entity.isWallAt("sud-ouest", x, y))
+	    southWestColor = wallColor;
+	if (entity.isWallAt("sud-est", x, y))
+	    southEastColor = wallColor;
+	if (entity.isWallAt("ouest-nord", x, y))
+	    westNorthColor = wallColor;
+	if (entity.isWallAt("est-nord", x, y))
+	    eastNorthColor = wallColor;
+	if (entity.isWallAt("ouest-sud", x, y))
+	    westSouthColor = wallColor;
+	if (entity.isWallAt("est-sud", x, y))
+	    eastSouthColor = wallColor;
+
+	html += "<table style=\"width:100%;height:100%\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">";
+
+	html += "<tr>";
+
+	html += "<td style=\"height:4px;width:4px;background-color:"
+		+ noWallColor + "\"><div></div></td>";
+	html += "<td style=\"height:4px;background-color:" + northWestColor
+		+ "\"><div></div></td>";
+	html += "<td style=\"height:4px;background-color:" + northEastColor
+		+ "\"><div></div></td>";
+	html += "<td style=\"height:4px;width:4px;background-color:"
+		+ noWallColor + "\"><div></div></td>";
+
+	html += "</tr>";
+
+	html += "<tr>";
+
+	html += "<td style=\"width:4px;background-color:" + westNorthColor
+		+ "\"><div></div></td>";
+	html += "<td colspan=\"2\" rowspan=\"2\" style=\"background-color:"
+		+ backgroundColor + "\">";
+	html += currentText;
+
+	Vector<ActionLink> actionLinkList = entity.getActionLinkListAt(x, y);
+
+	for (ActionLink link : actionLinkList)
+	{
+	    String currentLinkCode = LinkViewer.getHtmlCode(link);
+	    if (currentLinkCode.length() > 0)
+		html += currentLinkCode;
+	}
+
+	html += "</td>";
+	html += "<td style=\"width:4px;background-color:" + eastNorthColor
+		+ "\"><div></div></td>";
+
+	html += "</tr>";
+
+	html += "<tr>";
+
+	html += "<td style=\"width:4px;background-color:" + westSouthColor
+		+ "\"><div></div></td>";
+	html += "<td style=\"width:4px;background-color:" + eastSouthColor
+		+ "\"><div></div></td>";
+
+	html += "</tr>";
+
+	html += "<tr>";
+
+	html += "<td style=\"height:4px;width:4px;background-color:"
+		+ noWallColor + "\"><div></div></td>";
+	html += "<td style=\"height:4px;background-color:" + southWestColor
+		+ "\"><div></div></td>";
+	html += "<td style=\"height:4px;background-color:" + southEastColor
+		+ "\"><div></div></td>";
+	html += "<td style=\"height:4px;width:4px;background-color:"
+		+ noWallColor + "\"><div></div></td>";
+
+	html += "</tr>";
+
 	html += "</table>";
 
 	return html;
