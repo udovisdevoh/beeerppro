@@ -13,9 +13,13 @@ import newtonERP.viewers.viewables.FloorViewable;
  */
 public class FloorViewer
 {
-    private static final String noWallColor = "#333";
+    private static final String noWallColor = "#282828";
 
-    private static final String wallColor = "#AAA";
+    private static final String wallColor = "#DDD";
+
+    private static final int internalZoneSize = 72;
+
+    private static final int wallWidth = 4;
 
     /**
      * @param entity entité de plancher
@@ -52,7 +56,9 @@ public class FloorViewer
 		    }
 		}
 
-		html += "<td style=\"width:64px;height:64px\">";
+		html += "<td style=\"width:"
+			+ (internalZoneSize + wallWidth * 2) + "px;height:"
+			+ (internalZoneSize + wallWidth * 2) + "px\">";
 
 		html += getRoomHtml(currentText, currentColor, entity, x, y);
 
@@ -101,23 +107,26 @@ public class FloorViewer
 
 	html += "<tr>";
 
-	html += "<td style=\"height:4px;width:4px;background-color:"
-		+ noWallColor + "\"><div></div></td>";
-	html += "<td style=\"height:4px;background-color:" + northWestColor
-		+ "\"><div></div></td>";
-	html += "<td style=\"height:4px;background-color:" + northEastColor
-		+ "\"><div></div></td>";
-	html += "<td style=\"height:4px;width:4px;background-color:"
-		+ noWallColor + "\"><div></div></td>";
+	html += "<td style=\"height:" + wallWidth + "px;width:" + wallWidth
+		+ "px;background-color:" + noWallColor + "\"><div></div></td>";
+	html += "<td style=\"height:" + wallWidth + "px;background-color:"
+		+ northWestColor + "\"><div></div></td>";
+	html += "<td style=\"height:" + wallWidth + "px;background-color:"
+		+ northEastColor + "\"><div></div></td>";
+	html += "<td style=\"height:" + wallWidth + "px;width:" + wallWidth
+		+ "px;background-color:" + noWallColor + "\"><div></div></td>";
 
 	html += "</tr>";
 
 	html += "<tr>";
 
-	html += "<td style=\"width:4px;background-color:" + westNorthColor
+	html += "<td style=\"height:32px;width:" + wallWidth
+		+ "px;background-color:" + westNorthColor
 		+ "\"><div></div></td>";
-	html += "<td colspan=\"2\" rowspan=\"2\" style=\"background-color:"
-		+ backgroundColor + "\">";
+	html += "<td colspan=\"2\" rowspan=\"2\" ><div style=\"width:"
+		+ internalZoneSize + "px;height:" + internalZoneSize
+		+ "px;overflow:auto;background-color:" + backgroundColor
+		+ "\">";
 	html += currentText;
 
 	Vector<ActionLink> actionLinkList = entity.getActionLinkListAt(x, y);
@@ -129,31 +138,34 @@ public class FloorViewer
 		html += currentLinkCode;
 	}
 
-	html += "</td>";
-	html += "<td style=\"width:4px;background-color:" + eastNorthColor
+	html += "</div></td>";
+	html += "<td style=\"height:32px;width:" + wallWidth
+		+ "px;background-color:" + eastNorthColor
 		+ "\"><div></div></td>";
 
 	html += "</tr>";
 
 	html += "<tr>";
 
-	html += "<td style=\"width:4px;background-color:" + westSouthColor
+	html += "<td style=\"height:32px;width:" + wallWidth
+		+ "px;background-color:" + westSouthColor
 		+ "\"><div></div></td>";
-	html += "<td style=\"width:4px;background-color:" + eastSouthColor
+	html += "<td style=\"height:32px;width:" + wallWidth
+		+ "px;background-color:" + eastSouthColor
 		+ "\"><div></div></td>";
 
 	html += "</tr>";
 
 	html += "<tr>";
 
-	html += "<td style=\"height:4px;width:4px;background-color:"
-		+ noWallColor + "\"><div></div></td>";
-	html += "<td style=\"height:4px;background-color:" + southWestColor
-		+ "\"><div></div></td>";
-	html += "<td style=\"height:4px;background-color:" + southEastColor
-		+ "\"><div></div></td>";
-	html += "<td style=\"height:4px;width:4px;background-color:"
-		+ noWallColor + "\"><div></div></td>";
+	html += "<td style=\"height:" + wallWidth + "px;width:" + wallWidth
+		+ "px;background-color:" + noWallColor + "\"><div></div></td>";
+	html += "<td style=\"height:" + wallWidth + "px;background-color:"
+		+ southWestColor + "\"><div></div></td>";
+	html += "<td style=\"height:" + wallWidth + "px;background-color:"
+		+ southEastColor + "\"><div></div></td>";
+	html += "<td style=\"height:" + wallWidth + "px;width:" + wallWidth
+		+ "px;background-color:" + noWallColor + "\"><div></div></td>";
 
 	html += "</tr>";
 
