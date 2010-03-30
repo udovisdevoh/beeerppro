@@ -25,6 +25,8 @@ public class FloorViewerData extends AbstractEntity implements FloorViewable
 
     private String[][] zoneNameMap;
 
+    private Zone[][] zoneMap = null;
+
     private Floor sourceFloor = null;
 
     private HashSet<String> wallHash;
@@ -56,15 +58,22 @@ public class FloorViewerData extends AbstractEntity implements FloorViewable
 	rowCount = sourceFloor.getRowCount();
 	corridorMask = new Boolean[columnCount][rowCount];
 	zoneNameMap = new String[columnCount][rowCount];
+	zoneMap = new Zone[columnCount][rowCount];
 
 	for (int x = 0; x < columnCount; x++)
 	{
 	    for (int y = 0; y < rowCount; y++)
 	    {
-		zoneNameMap[x][y] = sourceFloor.getZoneNameAt(x, y);
 		corridorMask[x][y] = sourceFloor.isCorridorAt(x, y);
 
 		Zone zone = sourceFloor.getZoneAt(x, y);
+
+		if (zone == null)
+		    zoneNameMap[x][y] = "-";
+		else
+		    zoneNameMap[x][y] = zone.getKioskName();
+
+		zoneMap[x][y] = zone;
 
 		if (zone == null)
 		    continue;
