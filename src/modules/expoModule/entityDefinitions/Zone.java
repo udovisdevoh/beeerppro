@@ -3,6 +3,7 @@ package modules.expoModule.entityDefinitions;
 import java.util.Vector;
 
 import newtonERP.module.AbstractOrmEntity;
+import newtonERP.orm.Orm;
 import newtonERP.orm.associations.AccessorManager;
 import newtonERP.orm.field.Field;
 import newtonERP.orm.field.Fields;
@@ -64,5 +65,29 @@ public class Zone extends AbstractOrmEntity
 		.getSingleAccessor(this, "kioskCustomerID");
 
 	return kioskCustomer.getNaturalKeyDescription();
+    }
+
+    /**
+     * @param wallTypeName nom du type de muret
+     * @param x position x de la zone
+     * @param y position y de la zone
+     * @return s'il y a un muret à la position indiquée
+     * @throws Exception si ça fail
+     */
+    public boolean isMuretAt(String wallTypeName, int x, int y)
+	    throws Exception
+    {
+	WallType wallType = (WallType) Orm.getOrCreateEntity(new WallType(),
+		"Name", wallTypeName);
+
+	int wallTypeId = wallType.getPrimaryKeyValue();
+
+	Muret muret = new Muret();
+	muret.setData(wallType.getForeignKeyName(), wallTypeId);
+	muret.setData("zoneID", getPrimaryKeyValue());
+
+	Vector<AbstractOrmEntity> resultSet = muret.get();
+
+	return resultSet.size() > 0;
     }
 }

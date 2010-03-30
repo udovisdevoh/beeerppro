@@ -1,10 +1,14 @@
 package newtonERP.viewers.viewerData;
 
+import java.util.HashSet;
 import java.util.Vector;
 
 import modules.expoModule.entityDefinitions.Floor;
+import modules.expoModule.entityDefinitions.WallType;
+import modules.expoModule.entityDefinitions.Zone;
 import newtonERP.common.ActionLink;
 import newtonERP.module.AbstractEntity;
+import newtonERP.module.AbstractOrmEntity;
 import newtonERP.viewers.viewables.FloorViewable;
 
 /**
@@ -23,12 +27,17 @@ public class FloorViewerData extends AbstractEntity implements FloorViewable
 
     private Floor sourceFloor = null;
 
+    private HashSet<String> wallHash;
+
+    private static Vector<String> lazyWallTypeNameList = null;
+
     /**
      * @throws Exception si ça fail
      */
     public FloorViewerData() throws Exception
     {
 	super();
+	wallHash = new HashSet<String>();
     }
 
     /**
@@ -39,6 +48,7 @@ public class FloorViewerData extends AbstractEntity implements FloorViewable
     {
 	super();
 	this.sourceFloor = sourceFloor;
+	wallHash = new HashSet<String>();
 
 	sourceFloor = (Floor) sourceFloor.get().get(0);
 
@@ -53,8 +63,33 @@ public class FloorViewerData extends AbstractEntity implements FloorViewable
 	    {
 		zoneNameMap[x][y] = sourceFloor.getZoneNameAt(x, y);
 		corridorMask[x][y] = sourceFloor.isCorridorAt(x, y);
+
+		Zone zone = sourceFloor.getZoneAt(x, y);
+
+		if (zone == null)
+		    continue;
+
+		for (String wallTypeName : getWallTypeNameList())
+		    if (zone.isMuretAt(wallTypeName, x, y))
+			wallHash.add(wallTypeName + "-" + x + "-" + y);
 	    }
 	}
+    }
+
+    private Vector<String> getWallTypeNameList() throws Exception
+    {
+	if (lazyWallTypeNameList == null)
+	{
+	    lazyWallTypeNameList = new Vector<String>();
+
+	    WallType wallType = new WallType();
+
+	    Vector<AbstractOrmEntity> entityList = wallType.get();
+
+	    for (AbstractOrmEntity entity : entityList)
+		lazyWallTypeNameList.add((entity.getDataString("Name")));
+	}
+	return lazyWallTypeNameList;
     }
 
     @Override
@@ -94,5 +129,11 @@ public class FloorViewerData extends AbstractEntity implements FloorViewable
 	    return new Vector<ActionLink>();
 
 	return sourceFloor.getActionLinkListAt(x, y);
+    }
+
+    @Override
+    public boolean isWallAt(String wallName, int x, int y)
+    {
+	return wallHash.contains(wallName + "-" + x + "-" + y);
     }
 }
