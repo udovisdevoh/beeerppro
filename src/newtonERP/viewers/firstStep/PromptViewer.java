@@ -48,6 +48,8 @@ public class PromptViewer
 
 	for (Field<?> field : promptData.getData().getFields())
 	{
+	    if (promptData.isReadOnly())
+		field.setReadOnly(true);
 
 	    ListOfValue listOfValue = promptData.getData().tryMatchListOfValue(
 		    field.getShortName());
@@ -106,9 +108,11 @@ public class PromptViewer
 	    html += getMultipleAccessorLinkList((AbstractOrmEntity) data);
 	}
 
-	html += "<tr><td colspan=\"2\" align=\"center\" class=\"submitButton\">"
-		+ "<input class=\"submitButton\" type=\"submit\" name=\"submit\" value=\""
-		+ promptData.getButtonAction().getName() + "\" />";
+	html += "<tr><td colspan=\"2\" align=\"center\" class=\"submitButton\">";
+
+	if (!promptData.isReadOnly())
+	    html += "<input class=\"submitButton\" type=\"submit\" name=\"submit\" value=\""
+		    + promptData.getButtonAction().getName() + "\" />";
 
 	html += "</td></tr>";
 	html += "</table>";
