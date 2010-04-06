@@ -13,9 +13,9 @@ import newtonERP.viewers.viewables.FloorViewable;
  */
 public class FloorViewer
 {
-    private static final String noWallColor = "#282828";
+    private static final String noWallColor = "#433";
 
-    private static final String wallColor = "#DDD";
+    private static final String wallColor = "#DEE";
 
     private static final int internalZoneSize = 72;
 
