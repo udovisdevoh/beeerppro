@@ -146,6 +146,8 @@ public class ExpoModule extends Module
 	userRightModule.addGroupsRight("unLogedGroup", "Subscribe");
 	userRightModule.addGroupsRight("unLogedGroup", "Get", "Zone");
 	userRightModule.addGroupsRight("unLogedGroup", "Get", "Floor");
+	userRightModule.addGroupsRight("unLogedGroup", "Get", "KioskCustomer");
+	userRightModule.addGroupsRight("unLogedGroup", "Get", "CompanyDomain");
 
 	userRightModule.addGroupsRight("expoGroup", "Logout");
 	userRightModule.addGroupsRight("expoGroup", "ShowSplashScreen");
@@ -155,6 +157,8 @@ public class ExpoModule extends Module
 
 	userRightModule.addGroupsRight("expoGroup", "Get", "Zone");
 	userRightModule.addGroupsRight("expoGroup", "Get", "Floor");
+	userRightModule.addGroupsRight("expoGroup", "Get", "KioskCustomer");
+	userRightModule.addGroupsRight("expoGroup", "Get", "CompanyDomain");
     }
 
     private void initOptions() throws Exception

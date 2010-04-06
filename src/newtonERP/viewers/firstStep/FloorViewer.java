@@ -149,10 +149,12 @@ public class FloorViewer
 
 	html += "<td style=\"height:32px;width:" + wallWidth
 		+ "px;background-color:" + westSouthColor
-		+ "\"><div></div></td>";
+		+ "\"><div style=\"height:32px;width:" + wallWidth
+		+ "px\"></div></td>";
 	html += "<td style=\"height:32px;width:" + wallWidth
 		+ "px;background-color:" + eastSouthColor
-		+ "\"><div></div></td>";
+		+ "\"><div style=\"height:32px;width:" + wallWidth
+		+ "px\"></div></td>";
 
 	html += "</tr>";
 
