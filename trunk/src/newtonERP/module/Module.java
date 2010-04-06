@@ -322,11 +322,11 @@ public abstract class Module
 	if (actionName.equals("Delete"))
 	    return entity.deleteUI(parameters);
 	if (actionName.equals("Edit"))
-	    return entity.editUI(parameters);
+	    return entity.editUI(parameters, false);
 	if (actionName.equals("GetList"))
 	    return entity.getList(parameters);
 	if (actionName.equals("Get"))
-	    return entity.getUI(parameters);
+	    return entity.editUI(parameters, true);
 
 	throw new ActionNotFoundException("l'action " + actionName
 		+ "de l'entity" + entityName + "n'existe pas");

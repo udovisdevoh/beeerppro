@@ -74,7 +74,7 @@ public abstract class AbstractOrmEntity extends AbstractEntity
     {
 	getFields().setDefaultValue(false);
 
-	return editUI(parameters);
+	return editUI(parameters, false);
     }
 
     /**
@@ -171,6 +171,21 @@ public abstract class AbstractOrmEntity extends AbstractEntity
     public BaseViewerData editUI(Hashtable<String, String> parameters)
 	    throws Exception
     {
+	return editUI(parameters, false);
+    }
+
+    /**
+     * BaseAction Edit
+     * 
+     * @param parameters parametre suplementaire
+     * @param isReadOnly si on est en mode readOnly: true, sinon, false
+     *            (default: false)
+     * @return todo: qu'Est-ce que l'on devrai retourné en general?
+     * @throws Exception remonte
+     */
+    public BaseViewerData editUI(Hashtable<String, String> parameters,
+	    boolean isReadOnly) throws Exception
+    {
 	PromptViewerData promptData = new PromptViewerData();
 
 	AbstractOrmEntity retEntity;
@@ -192,7 +207,7 @@ public abstract class AbstractOrmEntity extends AbstractEntity
 	retEntity.setCurrentAction(new BaseAction("Edit", this));
 
 	if (parameters != null && parameters.containsKey("submit")
-		&& !fields.isErrorState())
+		&& !fields.isErrorState() && !isReadOnly)
 	{
 	    if (getPrimaryKeyValue() == 0)
 	    {
@@ -206,8 +221,8 @@ public abstract class AbstractOrmEntity extends AbstractEntity
 	    FlagPoolManager.applyFlagPoolChanges(this,
 		    getPositiveFlagPoolList().values(), parameters);
 
-	    retEntity = (AbstractOrmEntity) ((PromptViewerData) editUI(new Hashtable<String, String>()))
-		    .getData();
+	    retEntity = (AbstractOrmEntity) ((PromptViewerData) editUI(
+		    new Hashtable<String, String>(), isReadOnly)).getData();
 	    promptData.addNormalMessage("Changements accomplis");
 	}
 
@@ -228,6 +243,8 @@ public abstract class AbstractOrmEntity extends AbstractEntity
 	{
 	    promptData.addAlertMessage(fld.getErrorMessage());
 	}
+
+	promptData.setReadOnly(isReadOnly);
 
 	return promptData;
     }
@@ -299,8 +316,9 @@ public abstract class AbstractOrmEntity extends AbstractEntity
     public AbstractEntity getUI(Hashtable<String, String> parameters)
 	    throws Exception
     {
-	return editUI(parameters); // TODO: rendre readOnly, néscéssaire pour
-	// une gestion de droit sufisante
+	return editUI(parameters, true); // TODO: rendre readOnly, néscéssaire
+	// pour
+	// une gestion de droit suffisante
     }
 
     /**
