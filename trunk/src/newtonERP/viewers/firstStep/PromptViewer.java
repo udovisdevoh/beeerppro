@@ -104,8 +104,10 @@ public class PromptViewer
 		}
 	    }
 
-	    html += getSingleAccessorLinkList((AbstractOrmEntity) data);
-	    html += getMultipleAccessorLinkList((AbstractOrmEntity) data);
+	    html += getSingleAccessorLinkList((AbstractOrmEntity) data,
+		    promptData.isReadOnly());
+	    html += getMultipleAccessorLinkList((AbstractOrmEntity) data,
+		    promptData.isReadOnly());
 	}
 
 	html += "<tr><td colspan=\"2\" align=\"center\" class=\"submitButton\">";
@@ -122,14 +124,21 @@ public class PromptViewer
 	return html;
     }
 
-    private static String getMultipleAccessorLinkList(AbstractOrmEntity entity)
-	    throws Exception
+    private static String getMultipleAccessorLinkList(AbstractOrmEntity entity,
+	    boolean isReadOnly) throws Exception
     {
 	String html = "";
 
 	PluralAccessor pluralAccessor;
 
 	ScrollList scrollList;
+
+	String actionName;
+
+	if (isReadOnly)
+	    actionName = "Get";
+	else
+	    actionName = "Edit";
 
 	for (String accessorName : entity.getPluralAccessorList().keySet())
 	{
@@ -153,7 +162,7 @@ public class PromptViewer
 		scrollList.addLink(currentForeignEntity
 			.getNaturalKeyDescription(), Servlet.makeLink(
 			currentForeignEntity.getCurrentModule(),
-			new BaseAction("Edit", currentForeignEntity))
+			new BaseAction(actionName, currentForeignEntity))
 			+ "?"
 			+ currentForeignEntity.getPrimaryKeyName()
 			+ "="
@@ -181,10 +190,17 @@ public class PromptViewer
 	return html;
     }
 
-    private static String getSingleAccessorLinkList(AbstractOrmEntity entity)
-	    throws Exception
+    private static String getSingleAccessorLinkList(AbstractOrmEntity entity,
+	    boolean isReadOnly) throws Exception
     {
 	String html = "";
+
+	String actionName;
+
+	if (isReadOnly)
+	    actionName = "Get";
+	else
+	    actionName = "Edit";
 
 	ScrollList scrollList = new ScrollList("Est associé à");
 
@@ -198,7 +214,8 @@ public class PromptViewer
 	    String entityLinkName = foreignEntity.getNaturalKeyDescription();
 
 	    String entityUrl = Servlet.makeLink(foreignEntity
-		    .getCurrentModule(), new BaseAction("Edit", foreignEntity))
+		    .getCurrentModule(), new BaseAction(actionName,
+		    foreignEntity))
 		    + "?"
 		    + foreignEntity.getPrimaryKeyName()
 		    + "="
