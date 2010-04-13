@@ -46,6 +46,9 @@ public class EditProfile extends AbstractAction
 
 	promptEdit.setButtonAction(new ActionLink("Modifier son profil", this));
 
+	promptEdit.getData().getFields().getField("internetConnectionTypeID")
+		.setReadOnly(true);
+
 	return promptEdit;
     }
 }
