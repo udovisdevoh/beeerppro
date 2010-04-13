@@ -1,5 +1,6 @@
 package modules.expoModule;
 
+import modules.expoModule.actions.EditProfile;
 import modules.expoModule.actions.ShowSplashScreen;
 import modules.expoModule.actions.Subscribe;
 import modules.expoModule.actions.Unsubscribe;
@@ -42,6 +43,8 @@ public class ExpoModule extends Module
 	unsubscribeLink.setConfirm(true);
 
 	addGlobalActionButton(unsubscribeLink);
+
+	addGlobalActionMenuItem("Mon profil", new EditProfile());
 
 	addGlobalActionMenuItem("Planchers", new BaseAction("GetList",
 		new Floor()));
@@ -163,6 +166,7 @@ public class ExpoModule extends Module
 		.getModule("UserRightModule");
 
 	userRightModule.removeGroupsRight("admin", "Unsubscribe");
+	userRightModule.removeGroupsRight("admin", "EditProfile");
 
 	userRightModule.addGroupsRight("unLogedGroup", "ShowSplashScreen");
 	userRightModule.addGroupsRight("unLogedGroup", "Subscribe");
@@ -175,6 +179,7 @@ public class ExpoModule extends Module
 	userRightModule.addGroupsRight("expoGroup", "ShowSplashScreen");
 	userRightModule.addGroupsRight("expoGroup", "ViewFloor");
 	userRightModule.addGroupsRight("expoGroup", "Unsubscribe");
+	userRightModule.addGroupsRight("expoGroup", "EditProfile");
 
 	userRightModule.addGroupsRight("expoGroup", "GetList", "Floor");
 
