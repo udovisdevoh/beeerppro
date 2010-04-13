@@ -31,10 +31,17 @@ public class Unsubscribe extends AbstractAction
 	    PluralAccessor zoneList = kioskCustomer.getPluralAccessor("Zone");
 	    for (AbstractOrmEntity zone : zoneList)
 	    {
+		PluralAccessor wallList = zone.getPluralAccessor("Muret");
+
+		for (AbstractOrmEntity wall : wallList)
+		{
+		    wall.delete();
+		}
+
 		zone.delete();
 	    }
 
-	    kioskCustomer.delete();
+	    // kioskCustomer.delete(); On garde le client pour les factures
 	}
 
 	currentUser.delete();
