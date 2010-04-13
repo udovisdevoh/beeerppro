@@ -1,13 +1,18 @@
 package modules.expoModule;
 
+import modules.expoModule.actions.ShowSplashScreen;
+import modules.expoModule.actions.Subscribe;
+import modules.expoModule.actions.Unsubscribe;
 import modules.expoModule.entityDefinitions.CompanyDomain;
 import modules.expoModule.entityDefinitions.Corridor;
 import modules.expoModule.entityDefinitions.Floor;
 import modules.expoModule.entityDefinitions.InternetConnectionType;
+import modules.expoModule.entityDefinitions.KioskCustomer;
 import modules.expoModule.entityDefinitions.Option;
 import modules.expoModule.entityDefinitions.WallType;
 import modules.userRightModule.UserRightModule;
 import modules.userRightModule.entityDefinitions.Groups;
+import newtonERP.common.ActionLink;
 import newtonERP.common.ListModule;
 import newtonERP.module.BaseAction;
 import newtonERP.module.Module;
@@ -27,6 +32,21 @@ public class ExpoModule extends Module
 	super();
 	setDefaultAction(new BaseAction("GetList", new Floor()));
 	setVisibleName("Module d`exposition");
+	addGlobalActionMenuItem("Accueil", new ShowSplashScreen());
+	addGlobalActionMenuItem("S'abonner", new Subscribe());
+	// addGlobalActionMenuItem("Se désabonner", new Unsubscribe());
+
+	ActionLink unsubscribeLink = new ActionLink("Se désabonner",
+		new Unsubscribe());
+
+	unsubscribeLink.setConfirm(true);
+
+	addGlobalActionButton(unsubscribeLink);
+
+	addGlobalActionMenuItem("Planchers", new BaseAction("GetList",
+		new Floor()));
+	addGlobalActionMenuItem("Clients", new BaseAction("GetList",
+		new KioskCustomer()));
     }
 
     public void initDB() throws Exception
@@ -142,6 +162,8 @@ public class ExpoModule extends Module
 	UserRightModule userRightModule = (UserRightModule) ListModule
 		.getModule("UserRightModule");
 
+	userRightModule.removeGroupsRight("admin", "Unsubscribe");
+
 	userRightModule.addGroupsRight("unLogedGroup", "ShowSplashScreen");
 	userRightModule.addGroupsRight("unLogedGroup", "Subscribe");
 	userRightModule.addGroupsRight("unLogedGroup", "Get", "Zone");
@@ -152,6 +174,7 @@ public class ExpoModule extends Module
 	userRightModule.addGroupsRight("expoGroup", "Logout");
 	userRightModule.addGroupsRight("expoGroup", "ShowSplashScreen");
 	userRightModule.addGroupsRight("expoGroup", "ViewFloor");
+	userRightModule.addGroupsRight("expoGroup", "Unsubscribe");
 
 	userRightModule.addGroupsRight("expoGroup", "GetList", "Floor");
 

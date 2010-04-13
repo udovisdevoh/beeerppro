@@ -8,6 +8,7 @@ import java.util.Vector;
 import modules.userRightModule.entityDefinitions.Groups;
 import modules.userRightModule.entityDefinitions.GroupsRight;
 import modules.userRightModule.entityDefinitions.Right;
+import newtonERP.common.ActionLink;
 import newtonERP.common.NaturalMap;
 import newtonERP.module.exception.ActionNotFoundException;
 import newtonERP.module.exception.ModuleException;
@@ -31,6 +32,8 @@ public abstract class Module
     private String defaultAction;
     private String defaultEntity;
     private String visibleName;
+
+    private Vector<ActionLink> globalActionButtonList = null;
 
     private NaturalMap<String, AbstractAction> defaultBehaviorMenu;
 
@@ -350,6 +353,24 @@ public abstract class Module
     public final void addGlobalActionMenuItem(String name, AbstractAction action)
     {
 	getGlobalActionMenu().put(name, action);
+    }
+
+    /**
+     * @param actionLink bouton à ajouter
+     */
+    public void addGlobalActionButton(ActionLink actionLink)
+    {
+	getGlobalActionButtonList().add(actionLink);
+    }
+
+    /**
+     * @return liste des boutons du module
+     */
+    public Vector<ActionLink> getGlobalActionButtonList()
+    {
+	if (globalActionButtonList == null)
+	    globalActionButtonList = new Vector<ActionLink>();
+	return globalActionButtonList;
     }
 
     /**
