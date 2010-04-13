@@ -23,6 +23,7 @@ import newtonERP.viewers.firstStep.ImgViewer;
 import newtonERP.viewers.firstStep.PromptViewer;
 import newtonERP.viewers.firstStep.SplashScreenViewer;
 import newtonERP.viewers.firstStep.StaticTextViewer;
+import newtonERP.viewers.secondStep.ButtonLinkViewer;
 import newtonERP.viewers.secondStep.LinkViewer;
 import newtonERP.viewers.viewables.AlertViewable;
 import newtonERP.viewers.viewables.FloorViewable;
@@ -207,6 +208,16 @@ public abstract class Viewer
 					defaultAction));
 
 			if (currentLinkHtml.length() > 0)
+			    menuModuleHtml += "<li>" + currentLinkHtml
+				    + "</li>";
+		    }
+
+		    for (ActionLink button : module.getGlobalActionButtonList())
+		    {
+			String currentLinkHtml = ButtonLinkViewer
+				.getHtmlCode(button);
+			if (currentLinkHtml != null
+				&& currentLinkHtml.length() > 0)
 			    menuModuleHtml += "<li>" + currentLinkHtml
 				    + "</li>";
 		    }

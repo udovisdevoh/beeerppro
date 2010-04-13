@@ -33,9 +33,15 @@ public class ButtonLinkViewer
 	    String onClickConfirm = "";
 
 	    if (actionLink.isConfirm())
-		onClickConfirm = getOnClickConfirm(actionLink.getName(), entity
-			.getSystemName(), ((AbstractOrmEntity) entity)
-			.getNaturalKeyDescription());
+	    {
+		if (entity != null)
+		    onClickConfirm = getOnClickConfirm(actionLink.getName(),
+			    entity.getSystemName(),
+			    ((AbstractOrmEntity) entity)
+				    .getNaturalKeyDescription());
+		else
+		    onClickConfirm = getOnClickConfirm(actionLink.getName());
+	    }
 
 	    html += "<ins>";
 
@@ -96,6 +102,19 @@ public class ButtonLinkViewer
 	html += actionName + " ";
 	html += entityTypeName;
 	html += " " + value;
+	html += "?\")";
+
+	html += "'";
+
+	return html;
+    }
+
+    private static String getOnClickConfirm(String actionName)
+    {
+	String html = "";
+
+	html += "onclick='return confirm(\"Voulez-vous vraiment ";
+	html += actionName;
 	html += "?\")";
 
 	html += "'";
