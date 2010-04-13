@@ -9,6 +9,7 @@ import modules.expoModule.entityDefinitions.Corridor;
 import modules.expoModule.entityDefinitions.Floor;
 import modules.expoModule.entityDefinitions.InternetConnectionType;
 import modules.expoModule.entityDefinitions.KioskCustomer;
+import modules.expoModule.entityDefinitions.KioskInvoice;
 import modules.expoModule.entityDefinitions.Option;
 import modules.expoModule.entityDefinitions.WallType;
 import modules.userRightModule.UserRightModule;
@@ -48,8 +49,12 @@ public class ExpoModule extends Module
 
 	addGlobalActionMenuItem("Planchers", new BaseAction("GetList",
 		new Floor()));
+
 	addGlobalActionMenuItem("Clients", new BaseAction("GetList",
 		new KioskCustomer()));
+
+	addGlobalActionMenuItem("Rapports", new BaseAction("GetList",
+		new KioskInvoice()));
     }
 
     public void initDB() throws Exception
