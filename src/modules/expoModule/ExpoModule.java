@@ -4,6 +4,7 @@ import modules.expoModule.actions.EditProfile;
 import modules.expoModule.actions.ShowSplashScreen;
 import modules.expoModule.actions.Subscribe;
 import modules.expoModule.actions.Unsubscribe;
+import modules.expoModule.actions.ViewMyInvoices;
 import modules.expoModule.entityDefinitions.CompanyDomain;
 import modules.expoModule.entityDefinitions.Corridor;
 import modules.expoModule.entityDefinitions.Floor;
@@ -46,6 +47,8 @@ public class ExpoModule extends Module
 	addGlobalActionButton(unsubscribeLink);
 
 	addGlobalActionMenuItem("Mon profil", new EditProfile());
+
+	addGlobalActionMenuItem("Mes factures", new ViewMyInvoices());
 
 	addGlobalActionMenuItem("Planchers", new BaseAction("GetList",
 		new Floor()));
@@ -185,6 +188,7 @@ public class ExpoModule extends Module
 	userRightModule.addGroupsRight("expoGroup", "ViewFloor");
 	userRightModule.addGroupsRight("expoGroup", "Unsubscribe");
 	userRightModule.addGroupsRight("expoGroup", "EditProfile");
+	userRightModule.addGroupsRight("expoGroup", "ViewMyInvoices");
 
 	userRightModule.addGroupsRight("expoGroup", "GetList", "Floor");
 
