@@ -191,6 +191,8 @@ public class ExpoModule extends Module
 	userRightModule.addGroupsRight("expoGroup", "EditProfile");
 	userRightModule.addGroupsRight("expoGroup", "ViewMyInvoices");
 
+	userRightModule.addGroupsRight("expoGroup", "PayInvoice",
+		"KioskInvoice");
 	userRightModule.addGroupsRight("expoGroup", "GetList", "Floor");
 
 	userRightModule.addGroupsRight("expoGroup", "Get", "Zone");
