@@ -1,6 +1,7 @@
 package modules.expoModule;
 
 import modules.expoModule.actions.EditProfile;
+import modules.expoModule.actions.EditShoppingCart;
 import modules.expoModule.actions.ShowSplashScreen;
 import modules.expoModule.actions.Subscribe;
 import modules.expoModule.actions.Unsubscribe;
@@ -47,6 +48,8 @@ public class ExpoModule extends Module
 	addGlobalActionButton(unsubscribeLink);
 
 	addGlobalActionMenuItem("Mon profil", new EditProfile());
+
+	addGlobalActionMenuItem("Panier d'achat", new EditShoppingCart());
 
 	addGlobalActionMenuItem("Mes factures", new ViewMyInvoices());
 
@@ -176,6 +179,7 @@ public class ExpoModule extends Module
 	userRightModule.removeGroupsRight("admin", "Unsubscribe");
 	userRightModule.removeGroupsRight("admin", "EditProfile");
 	userRightModule.removeGroupsRight("admin", "ViewMyInvoices");
+	userRightModule.removeGroupsRight("admin", "EditShoppingCart");
 
 	userRightModule.addGroupsRight("unLogedGroup", "ShowSplashScreen");
 	userRightModule.addGroupsRight("unLogedGroup", "Subscribe");
@@ -189,6 +193,7 @@ public class ExpoModule extends Module
 	userRightModule.addGroupsRight("expoGroup", "ViewFloor");
 	userRightModule.addGroupsRight("expoGroup", "Unsubscribe");
 	userRightModule.addGroupsRight("expoGroup", "EditProfile");
+	userRightModule.addGroupsRight("expoGroup", "EditShoppingCart");
 	userRightModule.addGroupsRight("expoGroup", "ViewMyInvoices");
 
 	userRightModule.addGroupsRight("expoGroup", "PayInvoice",
