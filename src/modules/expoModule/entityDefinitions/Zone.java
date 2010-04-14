@@ -7,6 +7,7 @@ import newtonERP.orm.Orm;
 import newtonERP.orm.associations.AccessorManager;
 import newtonERP.orm.field.Field;
 import newtonERP.orm.field.Fields;
+import newtonERP.orm.field.type.FieldBool;
 import newtonERP.orm.field.type.FieldInt;
 
 /**
@@ -43,9 +44,14 @@ public class Zone extends AbstractOrmEntity
 	positionY.setNaturalKey(true);
 	fieldList.add(positionY);
 
-	FieldInt plugCount = new FieldInt("Nombre de prises électriques",
-		"PlugCount");
-	fieldList.add(plugCount);
+	/*
+	 * FieldInt plugCount = new FieldInt("Nombre de prises électriques",
+	 * "PlugCount"); fieldList.add(plugCount);
+	 */
+
+	FieldBool isActive = new FieldBool("Acitvée?", "isActive");
+	isActive.setNaturalKey(false);
+	fieldList.add(isActive);
 
 	FieldInt client = new FieldInt("Client", "kioskCustomerID");
 	client.setNaturalKey(true);

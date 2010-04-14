@@ -335,6 +335,7 @@ public abstract class AbstractOrmEntity extends AbstractEntity
      * @return une liste d'entité de ce type
      * @throws Exception lorsque la requête d'obtention de liste échoue
      */
+    @SuppressWarnings("null")
     public ListViewerData getList(Hashtable<String, String> parameters)
 	    throws Exception
     {
