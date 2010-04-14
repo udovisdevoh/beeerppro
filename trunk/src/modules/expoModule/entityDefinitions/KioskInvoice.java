@@ -1,8 +1,11 @@
 package modules.expoModule.entityDefinitions;
 
+import java.util.Hashtable;
 import java.util.Vector;
 
+import newtonERP.common.ActionLink;
 import newtonERP.module.AbstractOrmEntity;
+import newtonERP.module.BaseAction;
 import newtonERP.orm.associations.AccessorManager;
 import newtonERP.orm.field.Field;
 import newtonERP.orm.field.FieldCalcule;
@@ -10,6 +13,7 @@ import newtonERP.orm.field.Fields;
 import newtonERP.orm.field.type.FieldBool;
 import newtonERP.orm.field.type.FieldCurrency;
 import newtonERP.orm.field.type.FieldInt;
+import newtonERP.viewers.viewerData.ListViewerData;
 
 /**
  * Facture
@@ -68,5 +72,18 @@ public class KioskInvoice extends AbstractOrmEntity
 
 	    return total;
 	}
+    }
+
+    @Override
+    public ListViewerData getList(Hashtable<String, String> parameters)
+	    throws Exception
+    {
+	parameters.put(getPrimaryKeyName(), "&");
+
+	ListViewerData entityList = super.getList(parameters);
+	entityList.addSpecificActionButtonList(new ActionLink("Voir facture",
+		new BaseAction("Get", this), parameters));
+
+	return entityList;
     }
 }
