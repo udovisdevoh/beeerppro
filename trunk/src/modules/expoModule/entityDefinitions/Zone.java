@@ -25,6 +25,7 @@ public class Zone extends AbstractOrmEntity
 	setVisibleName("Zone");
 	AccessorManager.addAccessor(this, new Floor());
 	AccessorManager.addAccessor(this, new KioskCustomer());
+	AccessorManager.addAccessor(this, new KioskInvoiceItem());
     }
 
     public Fields initFields() throws Exception
@@ -49,6 +50,11 @@ public class Zone extends AbstractOrmEntity
 	FieldInt client = new FieldInt("Client", "kioskCustomerID");
 	client.setNaturalKey(true);
 	fieldList.add(client);
+
+	FieldInt kioskInvoiceItem = new FieldInt("Associé à facture",
+		"kioskInvoiceItemID");
+	kioskInvoiceItem.setNaturalKey(false);
+	fieldList.add(kioskInvoiceItem);
 
 	FieldInt floorID = new FieldInt("Plancher", "floorID");
 	fieldList.add(floorID);
