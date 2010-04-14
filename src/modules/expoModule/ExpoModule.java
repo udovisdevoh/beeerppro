@@ -56,7 +56,7 @@ public class ExpoModule extends Module
 	addGlobalActionMenuItem("Clients", new BaseAction("GetList",
 		new KioskCustomer()));
 
-	addGlobalActionMenuItem("Rapports", new BaseAction("GetList",
+	addGlobalActionMenuItem("Facture / Rapports", new BaseAction("GetList",
 		new KioskInvoice()));
     }
 
@@ -175,6 +175,7 @@ public class ExpoModule extends Module
 
 	userRightModule.removeGroupsRight("admin", "Unsubscribe");
 	userRightModule.removeGroupsRight("admin", "EditProfile");
+	userRightModule.removeGroupsRight("admin", "ViewMyInvoices");
 
 	userRightModule.addGroupsRight("unLogedGroup", "ShowSplashScreen");
 	userRightModule.addGroupsRight("unLogedGroup", "Subscribe");
