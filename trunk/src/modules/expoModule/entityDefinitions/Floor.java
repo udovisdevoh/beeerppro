@@ -168,10 +168,7 @@ public class Floor extends AbstractOrmEntity
 		.getPrimaryKeyValue().toString());
 
 	Vector<ActionLink> actionLinkList = new Vector<ActionLink>();
-	actionLinkList.add(new ActionLink("Gestion", new BaseAction("Edit",
-		zone), zoneIdParameters));
-
-	actionLinkList.add(new ActionLink("Info", new BaseAction("Get", zone),
+	actionLinkList.add(new ActionLink("Info", new BaseAction("Edit", zone),
 		zoneIdParameters));
 
 	return actionLinkList;
