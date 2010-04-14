@@ -3,6 +3,7 @@ package modules.expoModule.entityDefinitions;
 import java.util.Hashtable;
 import java.util.Vector;
 
+import modules.expoModule.actions.PayInvoice;
 import newtonERP.common.ActionLink;
 import newtonERP.module.AbstractOrmEntity;
 import newtonERP.module.BaseAction;
@@ -81,8 +82,11 @@ public class KioskInvoice extends AbstractOrmEntity
 	parameters.put(getPrimaryKeyName(), "&");
 
 	ListViewerData entityList = super.getList(parameters);
-	entityList.addSpecificActionButtonList(new ActionLink("Voir facture",
+	entityList.addSpecificActionButtonList(new ActionLink("Voir",
 		new BaseAction("Get", this), parameters));
+
+	entityList.addSpecificActionButtonList(new ActionLink("Payer",
+		new PayInvoice(), parameters));
 
 	return entityList;
     }

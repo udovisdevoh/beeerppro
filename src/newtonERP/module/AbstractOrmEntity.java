@@ -366,6 +366,23 @@ public abstract class AbstractOrmEntity extends AbstractEntity
 	    }
 	}
 
+	for (String fieldName : searchEntity.getFields().getKeyList())
+	{
+	    if (searchParameters == null)
+		searchParameters = new Vector<String>();
+	    String currentParameter;
+	    if (parameters.containsKey(fieldName)
+		    && !parameters.get(fieldName).equals("&"))
+
+	    {
+		currentParameter = fieldName + " = "
+			+ parameters.get(fieldName);
+		searchParameters.add(currentParameter);
+	    }
+	}
+	if (searchParameters.size() == 0)
+	    searchParameters = null;
+
 	resultSet = Orm.select(searchEntity, searchParameters, limit, offset,
 		orderBy);
 
