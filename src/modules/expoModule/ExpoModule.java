@@ -192,6 +192,7 @@ public class ExpoModule extends Module
 	userRightModule.addGroupsRight("expoGroup", "Get", "Floor");
 	userRightModule.addGroupsRight("expoGroup", "Get", "KioskCustomer");
 	userRightModule.addGroupsRight("expoGroup", "Get", "CompanyDomain");
+	userRightModule.addGroupsRight("expoGroup", "Get", "KioskInvoice");
     }
 
     private void initOptions() throws Exception
