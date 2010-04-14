@@ -124,9 +124,11 @@ public class Floor extends AbstractOrmEntity
 	if (zoneList.size() < 1)
 	    return null;
 
-	zone = (Zone) zoneList.get(0);
+	for (AbstractOrmEntity currentZone : zoneList)
+	    if ((Boolean) currentZone.getData("isActive"))
+		return (Zone) currentZone;
 
-	return zone;
+	return null;
     }
 
     @Override
