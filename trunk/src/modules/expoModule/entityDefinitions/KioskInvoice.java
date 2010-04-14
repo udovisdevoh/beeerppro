@@ -7,6 +7,7 @@ import newtonERP.orm.associations.AccessorManager;
 import newtonERP.orm.field.Field;
 import newtonERP.orm.field.FieldCalcule;
 import newtonERP.orm.field.Fields;
+import newtonERP.orm.field.type.FieldBool;
 import newtonERP.orm.field.type.FieldCurrency;
 import newtonERP.orm.field.type.FieldInt;
 
@@ -38,6 +39,9 @@ public class KioskInvoice extends AbstractOrmEntity
 	FieldInt client = new FieldInt("Client", "kioskCustomerID");
 	client.setNaturalKey(true);
 	fieldList.add(client);
+
+	FieldBool isPaid = new FieldBool("Payée?", "isPaid");
+	fieldList.add(isPaid);
 
 	FieldCurrency total = new FieldCurrency("Total", "total");
 	total.setCalcul(new FieldCalculeTotal());
