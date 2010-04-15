@@ -34,6 +34,9 @@ public class EditShoppingCart extends AbstractAction
 	promptViewerData.getData().getFields().getField("isPaid").setReadOnly(
 		true);
 
+	promptViewerData.getData().getFields().getField("kioskCustomerID")
+		.setReadOnly(true);
+
 	promptViewerData.setTitle("Panier d'achat");
 
 	return baseViewerData;
