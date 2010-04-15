@@ -51,7 +51,7 @@ public class ExpoModule extends Module
 
 	addGlobalActionMenuItem("Panier d'achat", new EditShoppingCart());
 
-	addGlobalActionMenuItem("Mes factures", new ViewMyInvoices());
+	addGlobalActionMenuItem("Mes transactions", new ViewMyInvoices());
 
 	addGlobalActionMenuItem("Planchers", new BaseAction("GetList",
 		new Floor()));
