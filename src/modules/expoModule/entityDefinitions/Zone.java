@@ -14,6 +14,7 @@ import newtonERP.orm.field.Fields;
 import newtonERP.orm.field.type.FieldBool;
 import newtonERP.orm.field.type.FieldInt;
 import newtonERP.viewers.viewerData.BaseViewerData;
+import newtonERP.viewers.viewerData.PromptViewerData;
 
 /**
  * Zone
@@ -120,7 +121,9 @@ public class Zone extends AbstractOrmEntity
 	User currentUser = Authentication.getCurrentUser();
 	Groups group = (Groups) currentUser.getSingleAccessor("groupsID");
 
-	if (!group.getData("groupName").equals("admin"))
+	boolean isAdmin = group.getData("groupName").equals("admin");
+
+	if (!isAdmin)
 	{
 	    Vector<AbstractOrmEntity> entityList = this.get();
 
@@ -162,6 +165,14 @@ public class Zone extends AbstractOrmEntity
 	}
 
 	BaseViewerData baseViewerData = super.editUI(parameters, isReadOnly);
+
+	if (!isAdmin)
+	{
+	    PromptViewerData promptViewerData = (PromptViewerData) baseViewerData;
+	    promptViewerData.getData().getFields().getField("isActive")
+		    .setReadOnly(true);
+	}
+
 	return baseViewerData;
     }
 }
