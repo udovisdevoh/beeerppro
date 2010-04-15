@@ -79,8 +79,7 @@ public class Muret extends AbstractOrmEntity
 
 		Zone zone = (Zone) muret.getSingleAccessor("zoneID");
 
-		Integer zoneOwnerCustomerId = (Integer) zone
-			.getData("kioskCustomerID");
+		Integer zoneOwnerCustomerId = zone.getCustomerOwnerId();
 
 		if (zoneOwnerCustomerId.equals(kioskCustomer
 			.getPrimaryKeyValue())

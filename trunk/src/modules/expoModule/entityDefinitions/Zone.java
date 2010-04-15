@@ -175,4 +175,17 @@ public class Zone extends AbstractOrmEntity
 
 	return baseViewerData;
     }
+
+    public Integer getCustomerOwnerId() throws Exception
+    {
+	KioskInvoiceItem kioskInvoiceItem = (KioskInvoiceItem) getSingleAccessor("kioskInvoiceItemID");
+
+	KioskInvoice kioskInvoice = (KioskInvoice) kioskInvoiceItem
+		.getSingleAccessor("kioskInvoiceID");
+
+	KioskCustomer kioskCustomer = (KioskCustomer) kioskInvoice
+		.getSingleAccessor("kioskCustomerID");
+
+	return kioskCustomer.getPrimaryKeyValue();
+    }
 }
