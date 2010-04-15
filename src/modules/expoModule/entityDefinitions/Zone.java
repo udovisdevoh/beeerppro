@@ -9,7 +9,6 @@ import newtonERP.common.Authentication;
 import newtonERP.module.AbstractOrmEntity;
 import newtonERP.orm.Orm;
 import newtonERP.orm.associations.AccessorManager;
-import newtonERP.orm.associations.PluralAccessor;
 import newtonERP.orm.field.Field;
 import newtonERP.orm.field.Fields;
 import newtonERP.orm.field.type.FieldBool;
@@ -31,7 +30,7 @@ public class Zone extends AbstractOrmEntity
 	super();
 	setVisibleName("Zone");
 	AccessorManager.addAccessor(this, new Floor());
-	AccessorManager.addAccessor(this, new KioskCustomer());
+	// AccessorManager.addAccessor(this, new KioskCustomer());
 	AccessorManager.addAccessor(this, new KioskInvoiceItem());
     }
 
@@ -59,11 +58,12 @@ public class Zone extends AbstractOrmEntity
 	isActive.setNaturalKey(false);
 	fieldList.add(isActive);
 
-	FieldInt client = new FieldInt("Client", "kioskCustomerID");
-	client.setNaturalKey(true);
-	fieldList.add(client);
+	/*
+	 * FieldInt client = new FieldInt("Client", "kioskCustomerID");
+	 * client.setNaturalKey(true); fieldList.add(client);
+	 */
 
-	FieldInt kioskInvoiceItem = new FieldInt("Associé à facture",
+	FieldInt kioskInvoiceItem = new FieldInt("Élément de facture",
 		"kioskInvoiceItemID");
 	kioskInvoiceItem.setNaturalKey(false);
 	fieldList.add(kioskInvoiceItem);
@@ -79,8 +79,13 @@ public class Zone extends AbstractOrmEntity
      */
     public String getKioskName() throws Exception
     {
-	KioskCustomer kioskCustomer = (KioskCustomer) AccessorManager
-		.getSingleAccessor(this, "kioskCustomerID");
+	KioskInvoiceItem kioskInvoiceItem = (KioskInvoiceItem) getSingleAccessor("kioskInvoiceItemID");
+
+	KioskInvoice kioskInvoice = (KioskInvoice) kioskInvoiceItem
+		.getSingleAccessor("kioskInvoiceID");
+
+	KioskCustomer kioskCustomer = (KioskCustomer) kioskInvoice
+		.getSingleAccessor("kioskCustomerID");
 
 	return kioskCustomer.getNaturalKeyDescription();
     }
@@ -117,21 +122,23 @@ public class Zone extends AbstractOrmEntity
 
 	if (!group.getData("groupName").equals("admin"))
 	{
-
-	    PluralAccessor customerList = currentUser
-		    .getPluralAccessor("KioskCustomer");
-
-	    KioskCustomer kioskCustomer = (KioskCustomer) customerList.get(0);
-
 	    Vector<AbstractOrmEntity> entityList = this.get();
 
 	    if (entityList.size() > 0)
 	    {
-
 		Zone zone = (Zone) entityList.get(0);
 
-		Integer zoneOwnerCustomerId = (Integer) zone
-			.getData("kioskCustomerID");
+		KioskInvoiceItem kioskInvoiceItem = (KioskInvoiceItem) zone
+			.getSingleAccessor("kioskInvoiceItemID");
+
+		KioskInvoice kioskInvoice = (KioskInvoice) kioskInvoiceItem
+			.getSingleAccessor("kioskInvoiceID");
+
+		KioskCustomer kioskCustomer = (KioskCustomer) kioskInvoice
+			.getSingleAccessor("kioskCustomerID");
+
+		Integer zoneOwnerCustomerId = kioskCustomer
+			.getPrimaryKeyValue();
 
 		if (zoneOwnerCustomerId.equals(kioskCustomer
 			.getPrimaryKeyValue())
