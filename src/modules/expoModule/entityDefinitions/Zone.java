@@ -176,6 +176,10 @@ public class Zone extends AbstractOrmEntity
 	return baseViewerData;
     }
 
+    /**
+     * @return ID du client propriétaire de la zone
+     * @throws Exception si ça fail
+     */
     public Integer getCustomerOwnerId() throws Exception
     {
 	KioskInvoiceItem kioskInvoiceItem = (KioskInvoiceItem) getSingleAccessor("kioskInvoiceItemID");
