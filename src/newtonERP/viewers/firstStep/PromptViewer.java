@@ -173,13 +173,16 @@ public class PromptViewer
 		    .containsFieldName(entity.getForeignKeyName())
 		    && entity.getPrimaryKeyValue() != 0)
 	    {
-		ActionLink newItemActionLink = new ActionLink(
-			"<img src='/file/images/plusIcon.gif' alt='Nouveau' style='display:block;margin-left:3px;margin-top:2px' />",
-			new BaseAction("New", pluralAccessor
-				.getInternalEntityDefinition()));
-		newItemActionLink.addParameters(entity.getForeignKeyName(),
-			entity.getPrimaryKeyValue().toString());
-		scrollList.addActionLink(newItemActionLink);
+		if (!isReadOnly)
+		{
+		    ActionLink newItemActionLink = new ActionLink(
+			    "<img src='/file/images/plusIcon.gif' alt='Nouveau' style='display:block;margin-left:3px;margin-top:2px' />",
+			    new BaseAction("New", pluralAccessor
+				    .getInternalEntityDefinition()));
+		    newItemActionLink.addParameters(entity.getForeignKeyName(),
+			    entity.getPrimaryKeyValue().toString());
+		    scrollList.addActionLink(newItemActionLink);
+		}
 	    }
 
 	    html += "<tr><td style=\"column-span: all;\" colspan=\"100%\">"
