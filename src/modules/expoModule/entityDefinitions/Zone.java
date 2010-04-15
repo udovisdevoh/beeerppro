@@ -113,7 +113,6 @@ public class Zone extends AbstractOrmEntity
 	    boolean isReadOnly) throws Exception
     {
 	User currentUser = Authentication.getCurrentUser();
-
 	Groups group = (Groups) currentUser.getSingleAccessor("groupsID");
 
 	if (!group.getData("groupName").equals("admin"))
