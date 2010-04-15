@@ -28,17 +28,32 @@ public class Unsubscribe extends AbstractAction
 
 	for (AbstractOrmEntity kioskCustomer : customerList)
 	{
-	    PluralAccessor zoneList = kioskCustomer.getPluralAccessor("Zone");
-	    for (AbstractOrmEntity zone : zoneList)
+	    PluralAccessor invoiceList = kioskCustomer
+		    .getPluralAccessor("KioskInvoice");
+
+	    for (AbstractOrmEntity invoice : invoiceList)
 	    {
-		PluralAccessor wallList = zone.getPluralAccessor("Muret");
+		PluralAccessor invoiceItemList = invoice
+			.getPluralAccessor("KioskInvoiceItem");
 
-		for (AbstractOrmEntity wall : wallList)
+		for (AbstractOrmEntity invoiceItem : invoiceItemList)
 		{
-		    wall.delete();
-		}
 
-		zone.delete();
+		    PluralAccessor zoneList = invoiceItem
+			    .getPluralAccessor("Zone");
+		    for (AbstractOrmEntity zone : zoneList)
+		    {
+			PluralAccessor wallList = zone
+				.getPluralAccessor("Muret");
+
+			for (AbstractOrmEntity wall : wallList)
+			{
+			    wall.delete();
+			}
+
+			zone.delete();
+		    }
+		}
 	    }
 
 	    // kioskCustomer.delete(); On garde le client pour les factures

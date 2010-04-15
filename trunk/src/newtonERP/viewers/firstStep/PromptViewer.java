@@ -14,6 +14,7 @@ import newtonERP.orm.field.Field;
 import newtonERP.serveur.Servlet;
 import newtonERP.viewers.secondStep.CheckListViewer;
 import newtonERP.viewers.secondStep.FieldViewer;
+import newtonERP.viewers.secondStep.LinkViewer;
 import newtonERP.viewers.secondStep.ScrollListViewer;
 import newtonERP.viewers.secondStep.SelectBoxViewer;
 import newtonERP.viewers.viewerData.PromptViewerData;
@@ -151,10 +152,14 @@ public class PromptViewer
 		    .getInternalEntityDefinition().getVisibleName()
 		    + "(s)");
 
-	    scrollList.setTitleUrl(Servlet.makeLink(pluralAccessor
-		    .getInternalEntityDefinition().getCurrentModule(),
-		    new BaseAction("GetList", pluralAccessor
-			    .getInternalEntityDefinition())));
+	    ActionLink titleActionLink = new ActionLink("", new BaseAction(
+		    "GetList", pluralAccessor.getInternalEntityDefinition()));
+	    String titleUrlLinkHtml = LinkViewer.getHtmlCode(titleActionLink);
+
+	    if (titleUrlLinkHtml.length() > 0)
+		scrollList.setTitleUrl(titleActionLink.getUrl());
+	    else
+		scrollList.setTitleUrl(null);
 
 	    for (AbstractOrmEntity currentForeignEntity : pluralAccessor)
 	    {
