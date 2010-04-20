@@ -41,7 +41,9 @@ public class FloorViewer
 		String currentText = "";
 		String currentColor = "#FFF";
 
-		if (entity.isCorridorAt(x, y))
+		boolean isCorridor = entity.isCorridorAt(x, y);
+
+		if (isCorridor)
 		{
 		    currentColor = "#000";
 		}
@@ -60,7 +62,8 @@ public class FloorViewer
 			+ (internalZoneSize + wallWidth * 2) + "px;height:"
 			+ (internalZoneSize + wallWidth * 2) + "px\">";
 
-		html += getRoomHtml(currentText, currentColor, entity, x, y);
+		html += getRoomHtml(currentText, currentColor, entity, x, y,
+			isCorridor);
 
 		html += "</td>";
 	    }
@@ -72,8 +75,8 @@ public class FloorViewer
     }
 
     private static String getRoomHtml(String currentText,
-	    String backgroundColor, FloorViewable entity, int x, int y)
-	    throws Exception
+	    String backgroundColor, FloorViewable entity, int x, int y,
+	    boolean isCorridor) throws Exception
     {
 	String html = "";
 
@@ -131,12 +134,13 @@ public class FloorViewer
 
 	Vector<ActionLink> actionLinkList = entity.getActionLinkListAt(x, y);
 
-	for (ActionLink link : actionLinkList)
-	{
-	    String currentLinkCode = LinkViewer.getHtmlCode(link);
-	    if (currentLinkCode.length() > 0)
-		html += currentLinkCode;
-	}
+	if (!isCorridor)
+	    for (ActionLink link : actionLinkList)
+	    {
+		String currentLinkCode = LinkViewer.getHtmlCode(link);
+		if (currentLinkCode.length() > 0)
+		    html += currentLinkCode;
+	    }
 
 	html += "</div></td>";
 	html += "<td style=\"height:32px;width:" + wallWidth
