@@ -105,6 +105,24 @@ public class PromptViewer
 		}
 	    }
 
+	    if (promptData.getComplementaryInfoLineList().size() > 0)
+	    {
+		html += "<tr><td colspan=\"2\"><ul>";
+		html += "<div class=\"checkList\">";
+
+		html += "<h3>Information complémentaire</h3>";
+
+		for (String complementaryInfo : promptData
+			.getComplementaryInfoLineList())
+		{
+		    html += "<li>" + complementaryInfo + "</li>";
+		}
+
+		html += "</div>";
+
+		html += "</ul></td></tr>";
+	    }
+
 	    html += getSingleAccessorLinkList((AbstractOrmEntity) data,
 		    promptData.isReadOnly());
 	    html += getMultipleAccessorLinkList((AbstractOrmEntity) data,
