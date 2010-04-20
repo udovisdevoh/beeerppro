@@ -163,8 +163,16 @@ public class Floor extends AbstractOrmEntity
 	Vector<AbstractOrmEntity> zoneList = zone.get();
 	if (zoneList.size() < 1)
 	{
+	    Hashtable<String, String> parameters = new Hashtable<String, String>();
+	    parameters.put("PositionX", Integer.toString(x));
+	    parameters.put("PositionY", Integer.toString(y));
+	    parameters
+		    .put(getPrimaryKeyName(), getPrimaryKeyValue().toString());
+
 	    Vector<ActionLink> actionLinkList = new Vector<ActionLink>();
-	    actionLinkList.add(new ActionLink("Acheter", new BuyZone()));
+	    actionLinkList.add(new ActionLink("Acheter", new BuyZone(),
+		    parameters));
+
 	    return actionLinkList;
 	}
 

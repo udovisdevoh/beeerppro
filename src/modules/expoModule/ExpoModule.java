@@ -180,6 +180,7 @@ public class ExpoModule extends Module
 	userRightModule.removeGroupsRight("admin", "EditProfile");
 	userRightModule.removeGroupsRight("admin", "ViewMyInvoices");
 	userRightModule.removeGroupsRight("admin", "EditShoppingCart");
+	userRightModule.removeGroupsRight("admin", "BuyZone");
 
 	userRightModule.addGroupsRight("unLogedGroup", "ShowSplashScreen");
 	userRightModule.addGroupsRight("unLogedGroup", "Subscribe");
