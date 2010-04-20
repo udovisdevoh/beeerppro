@@ -15,6 +15,14 @@ import newtonERP.orm.associations.PluralAccessor;
  */
 public class Unsubscribe extends AbstractAction
 {
+    /**
+     * Créer instance d'action
+     */
+    public Unsubscribe()
+    {
+	setDetailedDescription("Vous désabonner de l'exposition (mais nous croyons que vous ne ferez jamais ça)");
+    }
+
     @Override
     public AbstractEntity doAction(AbstractEntity entity,
 	    Hashtable<String, String> parameters) throws Exception

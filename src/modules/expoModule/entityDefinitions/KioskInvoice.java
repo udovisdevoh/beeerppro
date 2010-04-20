@@ -30,6 +30,7 @@ public class KioskInvoice extends AbstractOrmEntity
     {
 	super();
 	setVisibleName("Facture");
+	setDetailedDescription("facture de kiosque");
 	AccessorManager.addAccessor(this, new KioskCustomer());
     }
 

@@ -24,6 +24,7 @@ public class Option extends AbstractOrmEntity
     {
 	super();
 	setVisibleName("Option");
+	setDetailedDescription("option de zone de kiosque");
     }
 
     public Fields initFields() throws Exception

@@ -18,6 +18,14 @@ import newtonERP.viewers.viewerData.PromptViewerData;
  */
 public class EditProfile extends AbstractAction
 {
+    /**
+     * Créer instance d'action
+     */
+    public EditProfile()
+    {
+	setDetailedDescription("Modifier les informations de son profil");
+    }
+
     @Override
     public AbstractEntity doAction(AbstractEntity entity,
 	    Hashtable<String, String> parameters) throws Exception

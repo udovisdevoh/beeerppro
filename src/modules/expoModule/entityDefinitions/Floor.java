@@ -34,6 +34,7 @@ public class Floor extends AbstractOrmEntity
     {
 	super();
 	setVisibleName("Plancher");
+	setDetailedDescription("plancher d'exposition");
     }
 
     public Fields initFields() throws Exception

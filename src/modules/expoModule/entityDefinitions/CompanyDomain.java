@@ -22,6 +22,7 @@ public class CompanyDomain extends AbstractOrmEntity
     {
 	super();
 	setVisibleName("Domaine");
+	setDetailedDescription("champ d'activité d'un exposant");
     }
 
     public Fields initFields() throws Exception

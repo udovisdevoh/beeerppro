@@ -27,6 +27,7 @@ public class Muret extends AbstractOrmEntity
     {
 	super();
 	setVisibleName("Muret");
+	setDetailedDescription("muret de séparation pour l'exposition");
 	AccessorManager.addAccessor(this, new KioskCustomer());
 	AccessorManager.addAccessor(this, new Zone());
 	AccessorManager.addAccessor(this, new WallType());

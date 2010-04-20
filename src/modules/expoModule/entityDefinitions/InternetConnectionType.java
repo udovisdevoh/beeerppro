@@ -22,6 +22,7 @@ public class InternetConnectionType extends AbstractOrmEntity
     {
 	super();
 	setVisibleName("Connexion internet");
+	setDetailedDescription("type de connection internet");
     }
 
     public Fields initFields() throws Exception

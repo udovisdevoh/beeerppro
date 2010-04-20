@@ -19,6 +19,7 @@ public class ViewFloor extends AbstractAction
     public ViewFloor() throws Exception
     {
 	super(new Floor());
+	setDetailedDescription("Afficher le plancher d'exposition");
     }
 
     @Override

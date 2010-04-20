@@ -21,6 +21,7 @@ public class PayInvoice extends AbstractAction
     public PayInvoice() throws Exception
     {
 	super(new KioskInvoice());
+	setDetailedDescription("Effectuer le paiement d'une");
     }
 
     @Override

@@ -17,6 +17,13 @@ import newtonERP.viewers.viewerData.ListViewerData;
  */
 public class ViewMyInvoices extends AbstractAction
 {
+    /**
+     * Créer instance d'action
+     */
+    public ViewMyInvoices()
+    {
+	setDetailedDescription("Voir vos transactions et payer");
+    }
 
     @Override
     public AbstractEntity doAction(AbstractEntity entity,
