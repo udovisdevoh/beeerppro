@@ -4,6 +4,7 @@ import java.util.Hashtable;
 import java.util.TreeMap;
 import java.util.Vector;
 
+import modules.expoModule.actions.BuyZone;
 import modules.expoModule.actions.ViewFloor;
 import newtonERP.common.ActionLink;
 import newtonERP.module.AbstractOrmEntity;
@@ -161,7 +162,11 @@ public class Floor extends AbstractOrmEntity
 
 	Vector<AbstractOrmEntity> zoneList = zone.get();
 	if (zoneList.size() < 1)
-	    return new Vector<ActionLink>();
+	{
+	    Vector<ActionLink> actionLinkList = new Vector<ActionLink>();
+	    actionLinkList.add(new ActionLink("Acheter", new BuyZone()));
+	    return actionLinkList;
+	}
 
 	zone = (Zone) zoneList.get(0);
 
