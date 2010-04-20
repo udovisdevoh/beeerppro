@@ -1,5 +1,6 @@
 package modules.expoModule.entityDefinitions;
 
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -9,6 +10,7 @@ import newtonERP.common.Authentication;
 import newtonERP.module.AbstractOrmEntity;
 import newtonERP.orm.Orm;
 import newtonERP.orm.associations.AccessorManager;
+import newtonERP.orm.associations.PluralAccessor;
 import newtonERP.orm.field.Field;
 import newtonERP.orm.field.Fields;
 import newtonERP.orm.field.type.FieldBool;
@@ -22,6 +24,8 @@ import newtonERP.viewers.viewerData.PromptViewerData;
  */
 public class Zone extends AbstractOrmEntity
 {
+    private static HashSet<String> hiddenComplementaryInformation;
+
     /**
      * constructor
      * @throws Exception remonte
@@ -33,6 +37,12 @@ public class Zone extends AbstractOrmEntity
 	AccessorManager.addAccessor(this, new Floor());
 	// AccessorManager.addAccessor(this, new KioskCustomer());
 	AccessorManager.addAccessor(this, new KioskInvoiceItem());
+    }
+
+    static
+    {
+	hiddenComplementaryInformation = new HashSet<String>();
+	hiddenComplementaryInformation.add("Zone");
     }
 
     public Fields initFields() throws Exception
@@ -123,9 +133,10 @@ public class Zone extends AbstractOrmEntity
 
 	boolean isAdmin = group.getData("groupName").equals("admin");
 
+	Vector<AbstractOrmEntity> entityList = this.get();
+
 	if (!isAdmin)
 	{
-	    Vector<AbstractOrmEntity> entityList = this.get();
 
 	    if (entityList.size() > 0)
 	    {
@@ -173,7 +184,49 @@ public class Zone extends AbstractOrmEntity
 		    .setReadOnly(true);
 	}
 
+	if (entityList.size() > 0)
+	{
+	    Zone zone = (Zone) entityList.get(0);
+	    for (String complementaryInfoLine : zone
+		    .getComplementaryInfoLineList())
+		baseViewerData.addComplementaryInfoLine(complementaryInfoLine);
+	}
+
 	return baseViewerData;
+    }
+
+    private Vector<String> getComplementaryInfoLineList() throws Exception
+    {
+	Vector<String> complementaryInfoLineList = new Vector<String>();
+
+	KioskInvoiceItem kioskInvoiceItem = (KioskInvoiceItem) getSingleAccessor("kioskInvoiceItemID");
+
+	KioskInvoice kioskInvoice = (modules.expoModule.entityDefinitions.KioskInvoice) kioskInvoiceItem
+		.getSingleAccessor("kioskInvoiceID");
+
+	KioskCustomer kioskCustomer = (KioskCustomer) kioskInvoice
+		.getSingleAccessor("kioskCustomerID");
+
+	PluralAccessor invoiceList = kioskCustomer
+		.getPluralAccessor("KioskInvoice");
+
+	for (AbstractOrmEntity invoice : invoiceList)
+	{
+	    PluralAccessor invoiceItemList = invoice
+		    .getPluralAccessor("KioskInvoiceItem");
+
+	    for (AbstractOrmEntity invoiceItem : invoiceItemList)
+	    {
+		Option option = (Option) invoiceItem
+			.getSingleAccessor("optionID");
+		String optionName = option.getDataString("name");
+
+		if (!hiddenComplementaryInformation.contains(optionName))
+		    complementaryInfoLineList.add(optionName);
+	    }
+	}
+
+	return complementaryInfoLineList;
     }
 
     /**
