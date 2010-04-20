@@ -329,3 +329,14 @@ td
 	padding-top:0px;
 	padding-bottom:0px;
 }
+
+.HelpBalloon
+{
+	position:absolute;
+	visibility:hidden;
+	background-color:#FFF;
+	border-style:dashed;
+	border-width:1px;
+	border-color:#88F;
+	padding:10px;
+}
