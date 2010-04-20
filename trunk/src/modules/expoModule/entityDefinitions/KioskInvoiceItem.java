@@ -24,6 +24,7 @@ public class KioskInvoiceItem extends AbstractOrmEntity
     {
 	super();
 	setVisibleName("Élément de facture");
+	setDetailedDescription("élément de facture de kiosque");
 	AccessorManager.addAccessor(this, new KioskInvoice());
 	AccessorManager.addAccessor(this, new Option());
     }

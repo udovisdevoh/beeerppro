@@ -34,6 +34,8 @@ public class LinkViewer
 	{
 	    html += " <a href='" + actionLink.getUrlParam() + "'>";
 	    html += actionLink.getName() + "</a> ";
+
+	    html += HelpViewer.getHtmlCode(actionLink);
 	}
 
 	return html;

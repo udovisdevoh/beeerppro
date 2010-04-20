@@ -34,6 +34,7 @@ public class Zone extends AbstractOrmEntity
     {
 	super();
 	setVisibleName("Zone");
+	setDetailedDescription("zone d'exposition");
 	AccessorManager.addAccessor(this, new Floor());
 	// AccessorManager.addAccessor(this, new KioskCustomer());
 	AccessorManager.addAccessor(this, new KioskInvoiceItem());

@@ -24,6 +24,14 @@ import newtonERP.orm.field.type.FieldString;
  */
 public class Subscribe extends AbstractAction
 {
+    /**
+     * Créer instance d'action
+     */
+    public Subscribe()
+    {
+	setDetailedDescription("Vous abonner à l'exposition");
+    }
+
     @Override
     public AbstractEntity doAction(AbstractEntity entity,
 	    Hashtable<String, String> parameters) throws Exception

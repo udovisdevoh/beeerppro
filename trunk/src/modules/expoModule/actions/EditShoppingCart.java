@@ -20,6 +20,14 @@ import newtonERP.viewers.viewerData.PromptViewerData;
  */
 public class EditShoppingCart extends AbstractAction
 {
+    /**
+     * Créer instance d'action
+     */
+    public EditShoppingCart()
+    {
+	setDetailedDescription("Acheter des produits");
+    }
+
     @Override
     public AbstractEntity doAction(AbstractEntity entity,
 	    Hashtable<String, String> parameters) throws Exception

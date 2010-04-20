@@ -23,6 +23,7 @@ public class Corridor extends AbstractOrmEntity
 	super();
 	setVisibleName("Corridor");
 	AccessorManager.addAccessor(this, new Floor());
+	setDetailedDescription("corridor de kiosque");
     }
 
     @Override

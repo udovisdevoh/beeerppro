@@ -25,6 +25,7 @@ public class KioskCustomer extends AbstractOrmEntity
     {
 	super();
 	setVisibleName("Kiosque");
+	setDetailedDescription("client de kiosque");
 	AccessorManager.addAccessor(this, new CompanyDomain());
 	AccessorManager.addAccessor(this, new User());
 	AccessorManager.addAccessor(this, new InternetConnectionType());

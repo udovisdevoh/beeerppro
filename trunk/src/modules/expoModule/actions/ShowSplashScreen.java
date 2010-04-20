@@ -15,6 +15,14 @@ import newtonERP.module.generalEntity.SplashScreen;
  */
 public class ShowSplashScreen extends AbstractAction
 {
+    /**
+     * Créer instance d'action
+     */
+    public ShowSplashScreen()
+    {
+	setDetailedDescription("Retourner à l'accueil");
+    }
+
     @Override
     public AbstractEntity doAction(AbstractEntity sourceEntity,
 	    Hashtable<String, String> parameters) throws Exception

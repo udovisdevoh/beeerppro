@@ -64,6 +64,8 @@ public class ButtonLinkViewer
 	    html += "</form>";
 
 	    html += "</ins>";
+
+	    html += HelpViewer.getHtmlCode(actionLink);
 	}
 	else
 	{
