@@ -88,6 +88,10 @@ public class KioskCustomer extends AbstractOrmEntity
 	return entityList;
     }
 
+    /**
+     * @return liste des clef/valeur d'achat d'options
+     * @throws Exception si ça fail
+     */
     public Hashtable<String, Double> getItemPricePairList() throws Exception
     {
 	Hashtable<String, Double> itemPricePairList = new Hashtable<String, Double>();
