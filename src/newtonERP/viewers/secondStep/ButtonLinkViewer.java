@@ -26,6 +26,7 @@ public class ButtonLinkViewer
 	    AbstractEntity entity) throws Exception
     {
 	String html = "";
+	int balloonDivId = LinkViewer.getNextBalloonDivId();
 
 	if (isPermissionAllowed(actionLink))
 	{
@@ -55,7 +56,11 @@ public class ButtonLinkViewer
 		html += "<input type='hidden' name='" + key + "' value='"
 			+ param.get(key) + "' />";
 	    }
-	    html += "<input class='submitButton' type='submit' "
+	    html += "<input onmouseover='document.getElementById(\"balloon"
+		    + balloonDivId
+		    + "\").style.visibility=\"visible\"' onmouseout='document.getElementById(\"balloon"
+		    + balloonDivId
+		    + "\").style.visibility=\"hidden\"' class='submitButton' type='submit' "
 		    + onClickConfirm + " value=\"" + actionLink.getName()
 		    + "\" />";
 
@@ -65,7 +70,7 @@ public class ButtonLinkViewer
 
 	    html += "</ins>";
 
-	    html += HelpViewer.getHtmlCode(actionLink);
+	    html += HelpViewer.getHtmlCode(actionLink, balloonDivId);
 	}
 	else
 	{

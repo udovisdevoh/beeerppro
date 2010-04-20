@@ -13,11 +13,13 @@ public class HelpViewer
 
     /**
      * @param actionLink lien d'action
+     * @param helpDivId id DOM du div d'aide
      * @return retourne le code HTML
      */
-    public static String getHtmlCode(ActionLink actionLink)
+    public static String getHtmlCode(ActionLink actionLink, int helpDivId)
     {
-	String html = "";
+	String html = "<div class=\"HelpBalloon\" id=\"balloon" + helpDivId
+		+ "\">";
 
 	html += "Cliquez ici pour ";
 
@@ -32,6 +34,8 @@ public class HelpViewer
 		    word.toLowerCase().trim()))
 		html += " " + word;
 	}
+
+	html += "</div>";
 
 	return html;
     }

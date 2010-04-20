@@ -11,6 +11,8 @@ import newtonERP.common.ListModule;
  */
 public class LinkViewer
 {
+    private static int currentBalloonDivId = 0;
+
     /**
      * @param actionLink representation du lien a effectuer
      * @return bouton de lien
@@ -19,6 +21,8 @@ public class LinkViewer
     public static String getHtmlCode(ActionLink actionLink) throws Exception
     {
 	// String onClickConfirm = "";
+
+	int balloonDivId = getNextBalloonDivId();
 
 	/*
 	 * todo: a remettre des que les viewer son plus generaliser que
@@ -32,14 +36,28 @@ public class LinkViewer
 
 	if (isPermissionAllowed(actionLink))
 	{
-	    html += " <a href='" + actionLink.getUrlParam() + "'>";
+	    html += " <a href='"
+		    + actionLink.getUrlParam()
+		    + "' onmouseover='document.getElementById(\"balloon"
+		    + balloonDivId
+		    + "\").style.visibility=\"visible\"' onmouseout='document.getElementById(\"balloon"
+		    + balloonDivId + "\").style.visibility=\"hidden\"'>";
 	    html += actionLink.getName() + "</a> ";
 
-	    html += HelpViewer.getHtmlCode(actionLink);
+	    html += HelpViewer.getHtmlCode(actionLink, balloonDivId);
 	}
 
 	return html;
 
+    }
+
+    /**
+     * @return prochain ID de bulle d'aide
+     */
+    public static int getNextBalloonDivId()
+    {
+	currentBalloonDivId++;
+	return currentBalloonDivId;
     }
 
     @SuppressWarnings("unused")
