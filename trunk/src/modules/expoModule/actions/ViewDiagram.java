@@ -18,7 +18,7 @@ public class ViewDiagram extends AbstractAction
     public ViewDiagram() throws Exception
     {
 	super(new KioskCustomer());
-	setDetailedDescription("Voir les graphiques d'un");
+	setDetailedDescription("Voir les graphiques à barre additives d'un");
     }
 
     @Override
