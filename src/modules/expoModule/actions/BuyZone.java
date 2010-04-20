@@ -13,6 +13,7 @@ import newtonERP.common.Authentication;
 import newtonERP.module.AbstractAction;
 import newtonERP.module.AbstractEntity;
 import newtonERP.module.AbstractOrmEntity;
+import newtonERP.module.generalEntity.ForwardEntity;
 import newtonERP.orm.associations.PluralAccessor;
 import newtonERP.orm.field.type.FieldBool;
 
@@ -56,12 +57,15 @@ public class BuyZone extends AbstractAction
 	Zone zone = new Zone();
 	zone.setData("PositionX", parameters.get("PositionX"));
 	zone.setData("PositionY", parameters.get("PositionY"));
+	zone.setData("isActive", false);
 	zone.assign(invoiceItem);
 	zone.assign(floor);
 	zone.newE();
 
-	EditShoppingCart editShoppingCart = new EditShoppingCart();
-	return editShoppingCart.doAction(entity, parameters);
+	// EditShoppingCart editShoppingCart = new EditShoppingCart();
+	// return editShoppingCart.doAction(entity, parameters);
+
+	return new ForwardEntity("/ExpoModule/EditShoppingCart");
     }
 
     private KioskInvoice getCurrentActiveTransaction() throws Exception
