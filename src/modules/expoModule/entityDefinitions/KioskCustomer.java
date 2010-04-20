@@ -1,8 +1,11 @@
 package modules.expoModule.entityDefinitions;
 
+import java.util.Hashtable;
 import java.util.Vector;
 
+import modules.expoModule.actions.ViewDiagram;
 import modules.userRightModule.entityDefinitions.User;
+import newtonERP.common.ActionLink;
 import newtonERP.module.AbstractOrmEntity;
 import newtonERP.orm.associations.AccessorManager;
 import newtonERP.orm.field.Field;
@@ -10,6 +13,7 @@ import newtonERP.orm.field.Fields;
 import newtonERP.orm.field.type.FieldDateTime;
 import newtonERP.orm.field.type.FieldInt;
 import newtonERP.orm.field.type.FieldString;
+import newtonERP.viewers.viewerData.ListViewerData;
 
 /**
  * Client de kiosque
@@ -67,5 +71,17 @@ public class KioskCustomer extends AbstractOrmEntity
 	date.setReadOnly(true);
 	fieldList.add(date);
 	return new Fields(fieldList);
+    }
+
+    @Override
+    public ListViewerData getList(Hashtable<String, String> parameters)
+	    throws Exception
+    {
+	ListViewerData listViewerData = super.getList(parameters);
+
+	listViewerData.addSpecificActionButtonList((new ActionLink(
+		"Voir graphiques", new ViewDiagram())));
+
+	return listViewerData;
     }
 }
