@@ -47,7 +47,7 @@ public class BaseAction extends AbstractAction
 	else if (actionName == "Edit")
 	    setDetailedDescription("Effectuer une modification sur");
 	else if (actionName == "Delete")
-	    setDetailedDescription("Effacer de manière inconditionnelle");
+	    setDetailedDescription("Effacer de manière permanente");
 	else if (actionName == "Get")
 	    setDetailedDescription("Afficher les informations sur (le/la)");
 	else if (actionName == "GetList")
