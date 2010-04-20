@@ -34,4 +34,14 @@ public class BandDiagramViewerData extends AbstractEntity implements
 	    diagramInfo = new Hashtable<String, Double>();
 	return diagramInfo;
     }
+
+    @Override
+    public double getMaximumValue()
+    {
+	double max = 0;
+	for (double value : getDiagramInfo().values())
+	    if (value > max)
+		max = value;
+	return max;
+    }
 }
