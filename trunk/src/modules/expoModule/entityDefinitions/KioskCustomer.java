@@ -8,6 +8,7 @@ import modules.userRightModule.entityDefinitions.User;
 import newtonERP.common.ActionLink;
 import newtonERP.module.AbstractOrmEntity;
 import newtonERP.orm.associations.AccessorManager;
+import newtonERP.orm.associations.PluralAccessor;
 import newtonERP.orm.field.Field;
 import newtonERP.orm.field.Fields;
 import newtonERP.orm.field.type.FieldDateTime;
@@ -77,11 +78,50 @@ public class KioskCustomer extends AbstractOrmEntity
     public ListViewerData getList(Hashtable<String, String> parameters)
 	    throws Exception
     {
-	ListViewerData listViewerData = super.getList(parameters);
 
-	listViewerData.addSpecificActionButtonList((new ActionLink(
-		"Voir graphiques", new ViewDiagram())));
+	parameters.put(getPrimaryKeyName(), "&");
 
-	return listViewerData;
+	ListViewerData entityList = super.getList(parameters);
+	entityList.addSpecificActionButtonList(new ActionLink(
+		"Voir graphiques", new ViewDiagram(), parameters));
+
+	return entityList;
+    }
+
+    public Hashtable<String, Double> getItemPricePairList() throws Exception
+    {
+	Hashtable<String, Double> itemPricePairList = new Hashtable<String, Double>();
+
+	PluralAccessor kioskInvoiceList = this
+		.getPluralAccessor("KioskInvoice");
+
+	for (AbstractOrmEntity kioskInvoice : kioskInvoiceList)
+	{
+	    PluralAccessor kioskInvoiceItemList = kioskInvoice
+		    .getPluralAccessor("KioskInvoiceItem");
+
+	    for (AbstractOrmEntity kioskInvoiceItemOrmEntity : kioskInvoiceItemList)
+	    {
+		KioskInvoiceItem invoiceItem = (KioskInvoiceItem) kioskInvoiceItemOrmEntity;
+
+		Option option = (Option) invoiceItem
+			.getSingleAccessor("optionID");
+
+		if (option != null)
+		{
+		    String itemName = option.getDataString("name");
+
+		    if (!itemPricePairList.containsKey(itemName))
+			itemPricePairList.put(itemName, 0.0);
+
+		    itemPricePairList.put(itemName, itemPricePairList
+			    .get(itemName)
+			    + invoiceItem.getTotal());
+
+		}
+	    }
+	}
+
+	return itemPricePairList;
     }
 }

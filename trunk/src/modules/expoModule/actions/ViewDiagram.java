@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import modules.expoModule.entityDefinitions.KioskCustomer;
 import newtonERP.module.AbstractAction;
 import newtonERP.module.AbstractEntity;
+import newtonERP.viewers.viewerData.BandDiagramViewerData;
 
 /**
  * 
@@ -25,7 +26,15 @@ public class ViewDiagram extends AbstractAction
     public AbstractEntity doAction(AbstractEntity entity,
 	    Hashtable<String, String> parameters) throws Exception
     {
-	// TODO Auto-generated method stub
-	return null;
+	KioskCustomer kioskCustomer = (KioskCustomer) entity;
+	kioskCustomer = (KioskCustomer) kioskCustomer.get().get(0);
+
+	Hashtable<String, Double> itemPricePairList = kioskCustomer
+		.getItemPricePairList();
+
+	BandDiagramViewerData diagram = new BandDiagramViewerData(
+		itemPricePairList);
+
+	return diagram;
     }
 }
