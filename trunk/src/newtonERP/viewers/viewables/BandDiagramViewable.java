@@ -12,4 +12,9 @@ public interface BandDiagramViewable
      * @return modèle de donnée du diagramme
      */
     Hashtable<String, Double> getDiagramInfo();
+
+    /**
+     * @return valeur maximum du diagramme
+     */
+    double getMaximumValue();
 }

@@ -15,6 +15,7 @@ import newtonERP.module.generalEntity.SplashScreen;
 import newtonERP.serveur.ConfigManager;
 import newtonERP.serveur.Servlet;
 import newtonERP.viewers.firstStep.AlertViewer;
+import newtonERP.viewers.firstStep.BandDiagramViewer;
 import newtonERP.viewers.firstStep.BaseViewer;
 import newtonERP.viewers.firstStep.FloorViewer;
 import newtonERP.viewers.firstStep.ForwardViewer;
@@ -26,6 +27,7 @@ import newtonERP.viewers.firstStep.StaticTextViewer;
 import newtonERP.viewers.secondStep.ButtonLinkViewer;
 import newtonERP.viewers.secondStep.LinkViewer;
 import newtonERP.viewers.viewables.AlertViewable;
+import newtonERP.viewers.viewables.BandDiagramViewable;
 import newtonERP.viewers.viewables.FloorViewable;
 import newtonERP.viewers.viewables.ForwardViewable;
 import newtonERP.viewers.viewables.StaticTextViewable;
@@ -76,6 +78,9 @@ public abstract class Viewer
 	    viewerHtml += ImgViewer.getHtmlCode((ImgViewerData) entity);
 	else if (entity instanceof SplashScreen)
 	    viewerHtml += SplashScreenViewer.getHtmlCode((SplashScreen) entity);
+	else if (entity instanceof BandDiagramViewable)
+	    viewerHtml += BandDiagramViewer
+		    .getHtmlCode((BandDiagramViewable) entity);
 	else if (entity == null)
 	    viewerHtml += "<!-- page vide -->";
 	else
