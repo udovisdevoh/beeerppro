@@ -12,5 +12,6 @@
 	<default-action>ShowSplashScreen</default-action>
 	<style-screen>/file/styleScreen.css</style-screen>
 	<style-print>/file/stylePrint.css</style-print>
+	<show-top-title>false</show-top-title>
 	<port>47098</port>
 </config>
