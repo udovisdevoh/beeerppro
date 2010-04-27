@@ -122,8 +122,10 @@ public abstract class Viewer
 		+ ConfigManager.getStyleFileScreen() + "\" media=\"screen\" />";
 	header += "<link rel=\"stylesheet\" type=\"text/css\" title=\"base\" href=\""
 		+ ConfigManager.getStyleFilePrint() + "\" media=\"print\" />";
-	header += "</head><body><div id=\"header\"><h1>" + pageTitle
-		+ "</h1></div>";
+	header += "</head><body>";
+
+	if (ConfigManager.isDisplayTopTitle())
+	    header += "<div id=\"header\"><h1>" + pageTitle + "</h1></div>";
 
 	return header;
     }

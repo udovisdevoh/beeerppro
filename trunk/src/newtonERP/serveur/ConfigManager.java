@@ -40,6 +40,8 @@ public class ConfigManager
 
     private static Document document = null;
 
+    private static Boolean isDisplayHeader = null;
+
     /**
      * @return le port (possiblement 80 ou autre) pour le portail web de
      *         l'application
@@ -158,6 +160,14 @@ public class ConfigManager
 		.getNodeValue();
     }
 
+    private static Boolean loadIsDisplayTitle() throws Exception
+    {
+	NodeList nodeList = getDocument()
+		.getElementsByTagName("show-top-title");
+	return Boolean.parseBoolean(nodeList.item(0).getFirstChild()
+		.getNodeValue());
+    }
+
     private static int loadPort() throws Exception
     {
 	NodeList nodeList = getDocument().getElementsByTagName("port");
@@ -223,5 +233,17 @@ public class ConfigManager
 	if (defaultActionName == null)
 	    defaultActionName = loadDefaultActionName();
 	return defaultActionName;
+    }
+
+    /**
+     * @return si on veut afficher le header du programme
+     * @throws Exception is ça fail
+     */
+    public static boolean isDisplayTopTitle() throws Exception
+    {
+	if (isDisplayHeader == null)
+	    isDisplayHeader = loadIsDisplayTitle();
+
+	return isDisplayHeader;
     }
 }
